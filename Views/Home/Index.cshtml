@@ -1,0 +1,30 @@
+@{
+    ViewBag.Title = "Welcome";
+}
+
+@section Imports{
+    <link rel="import" href="~/elements/elements.html">
+}
+
+<!-- Navigation section -->
+<nav-bar>
+    <ul class="nav">
+        <li><a href="/">Home</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/courses">Courses</a></li>
+        <li><a href="/signup">Sign Up</a></li>
+        <li><a href="/signin">Sing In</a></li>
+        <li><a href="/signout">Sing Out</a></li>
+    </ul>
+</nav-bar>
+
+<!-- Main Content -->
+<ajax-container>
+    Loading...
+</ajax-container>
+
+<!-- footer -->
+
+@section scripts{
+    <script src="~/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+}

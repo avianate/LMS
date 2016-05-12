@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+    <head>
+        <base href="/">
+        <meta charset='utf-8'>
+        <title>ViewBag.Title</title>
+        @RenderSection("imports", false)
+    </head>
+    <body>
+        @RenderBody()
+        
+        @RenderSection("scripts", false)
+        @RenderSection("footer", false)
+    </body>
+</html>
