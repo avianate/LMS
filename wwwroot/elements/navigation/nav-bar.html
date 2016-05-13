@@ -1,19 +1,43 @@
-<link rel='import' href='../bower_components/polymer/polymer.html' />
+<link rel='import' href='../../bower_components/polymer/polymer.html' />
 
 
 <dom-module id='nav-bar'>
     <template>
         <style>
-            a {
-                color: red;
+            :host {
+                display: flex;
+                flex-flow: row;
+                flex-wrap: nowrap;
+                justify-content: space-between;
+            }
+            
+            :host ::content a {
+                text-decoration: none;
+            }
+            
+            :host ::content ul {
+                list-style: none;
+                display: flex;
+                flex-wrap: nowrap;
+                flex-direction: row;
+            }
+            
+            :host ::content li {
+                width: 100px;
+            }
+            
+            :host ::content ul.nav-left {
+                justify-content: flex-start;
+            }
+            
+            :host ::content ul.nav-right {
+                justify-content: flex-end;
             }
         </style>
 
-        <a href="#">Red Link</a>
-        <!--<div class="wrapper">
             <content select='ul[class="nav"]'></content>
-            <a href="#">Red Link</a>
-        </div>-->
+            <content select='ul[class="nav-left"]'></content>
+            <content select='ul[class="nav-right"]'></content>
 
     </template>
 

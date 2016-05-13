@@ -1,6 +1,6 @@
 (function (router, XHR) {
     "use strict";
-    
+        
     router.mapRoute({
         route: "/",
         templateUrl: "",
