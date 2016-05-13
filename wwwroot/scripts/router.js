@@ -29,14 +29,15 @@ var router = (function (XHR) {
     
     function pushHistory(target) {
         var targetUrl = target.getAttribute("href");
+        var prettyUrl = targetUrl === "/" ? "/" : targetUrl.replace("/", "");
         
-        history.pushState(null, targetUrl.replace("/", ""), targetUrl.replace("/", ""));
+        history.pushState(prettyUrl, prettyUrl, prettyUrl);
         document.title = targetUrl.replace("/", "");
         route();
     };
     
     function replaceHistory(title) {
-        history.replaceState(null, null, title);
+        history.replaceState(title, title, title);
         document.title = title;
     }
     
