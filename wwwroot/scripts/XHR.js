@@ -6,7 +6,7 @@ var XHR = (function () {
     // Example request Object:
     /*
         {
-            requestType: "GET" or "POST",
+            requestType: "GET" or "POST" (default is GET),
             url: "http://theurl.com",
             async: false  default is true,
             data: postData
@@ -66,12 +66,31 @@ var XHR = (function () {
             
             request.send();
         }
-    }
+    };
     
+    // Example POST Object:
+    /*
+        {
+            url: "http://theurl.com",
+            async: false  (default is true)
+            data: postData
+            responseType: "JSON" or Null for data
+            success: a callback function() {}
+            error: a callback function () {}
+        }
+    */
+    function post (obj) {
+        obj.requestType = "POST";
+        
+        this.get(obj);  
+    };
+    
+    // exposed functions & variables
     return {
         // public functions
         
-        get: get
+        get: get,
+        post: post
     };
     
 })();
