@@ -1,3 +1,7 @@
-ul {
-    list-style: none;
+@import "reset.css";
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
 }
