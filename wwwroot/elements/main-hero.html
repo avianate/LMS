@@ -14,17 +14,44 @@
                 height: 50%;
                 position: absolute;
             }
+            
+            :host .value1, .value2 {
+                color: white;
+                margin: 15px auto;
+                text-align: center;
+                font-size: 1.5rem;
+                font-family: sans-serif;
+            }
         </style>
         
         <div class="hero">
-            
+            <div class="value1">Value 1: <span>[[value1]]</span></div>
+            <div class="value2">Value 2: <span>[[value2]]</span></div>
         </div>
         
     </template>
 
     <script>
         Polymer({
-            is: 'main-hero'
+            is: 'main-hero',
+            created: function () {
+                // inside of the XHR.get method, "this" refers to the XHR object
+                var self = this;
+                console.log(this.localName + "# " + this.id + ' was created');
+                XHR.get({
+                    requestType: "GET",
+                    url: "/api/data",
+                    responseType: "JSON",
+                    success: function(data) {
+                        self.value1 = data[0];
+                        self.value2 = data[1];
+                    }
+                });
+            },
+            properties: {
+                value1: String,
+                value2: String
+            }
         });
     </script>
 </dom-module>
