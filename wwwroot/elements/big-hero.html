@@ -1,13 +1,14 @@
-<link rel='import' href='../bower_components/polymer/polymer.html' />
-<link rel="import" href="./elements.html">
+<link rel='import' href='libraryPath/polymer/polymer.html' />
 
-<dom-module id='ajax-container'>
+
+<dom-module id='big-hero'>
     <template>
         <style>
             :host {
                 display: flex;
-                flex-direction: row;
+                flex-flow: row;
                 flex-wrap: nowrap;
+                justify-content: center;
             }
         </style>
 
@@ -17,7 +18,7 @@
 
     <script>
         Polymer({
-            is: 'ajax-container'
+            is: 'big-hero'
         });
     </script>
 </dom-module>
