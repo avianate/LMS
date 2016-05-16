@@ -3,8 +3,8 @@
         
     router.mapRoute({
         route: "/",
-        templateUrl: "",
-        controller: handleDefaultResponse
+        templateUrl: "/app/default.html",
+        default: true
     });
     
     router.mapRoute({
