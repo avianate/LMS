@@ -8,14 +8,28 @@
                 display: flex;
                 flex-flow: row;
                 flex-wrap: nowrap;
-                justify-content: space-between;
+                justify-content: center;
                 height: 50px;
                 padding: 20px;
                 align-items: center;
+                z-index: 1000;
+                position: relative;
+            }
+            
+            :host div.wrapper {
+                display: flex;
+                flex-flow: row nowrap;
+                height: 40px;
+                border-bottom: 1px solid hsla(0, 0%, 100%, 0.2);
             }
             
             :host ::content a {
                 text-decoration: none;
+                color: hsla(0, 0%, 100%, 0.7);
+            }
+            
+            :host ::content a:hover {
+                color: #fff;
             }
             
             :host ::content ul {
@@ -41,11 +55,12 @@
             }
             
         </style>
-
+        
+        <div class="wrapper">
             <content select='ul[class="nav"]'></content>
             <content select='ul[class="nav-left"]'></content>
             <content select='ul[class="nav-right"]'></content>
-
+        </div>
     </template>
 
     <script>
