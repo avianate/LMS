@@ -6,25 +6,48 @@
         <style>
             :host {
                 display: flex;
-                flex-flow: row;
-                flex-wrap: nowrap;
-                justify-content: center;
-                height: 50px;
-                padding: 20px;
-                align-items: center;
-                z-index: 1000;
+                flex-flow: row nowrap;
+                justify-content: space-around;
                 position: relative;
+                width: 100%;
+                height: 50px;
+                border-bottom: 1px solid hsla(0, 0%, 100%, 0.2);
+                z-index: 1000;
             }
             
-            :host div.wrapper {
+            :host .left-container, .right-container {
                 display: flex;
                 flex-flow: row nowrap;
-                height: 40px;
-                border-bottom: 1px solid hsla(0, 0%, 100%, 0.2);
+                width: 300px;
+                z-index: 1000;
+            }
+            
+            :host .center-container {
+                justify-content: center;
+            }
+            
+            :host .left-container {
+                justify-content: flex-start;
+            }
+            
+            :host .right-container {
+                justify-content: flex-end;
+            }
+            
+            :host ::content .nav-left,
+            :host ::content .nav-right,
+            :host ::content .nav {
+                display: flex;
+                flex-flow: row nowrap;
+                justify-content: space-around;
+                flex-basis: 300px;
+                align-items: center;
+                color: white;
             }
             
             :host ::content a {
                 text-decoration: none;
+                font-family: sans-serif;
                 color: hsla(0, 0%, 100%, 0.7);
             }
             
@@ -32,33 +55,12 @@
                 color: #fff;
             }
             
-            :host ::content ul {
-                list-style: none;
-                display: flex;
-                flex-wrap: nowrap;
-                flex-direction: row;
-                
-                font-family: "Open Sans", Helvetica, Arial, sans-serif;
-                font-size: 1.2rem;
-            }
-            
-            :host ::content li {
-                width: 100px;
-            }
-            
-            :host ::content ul.nav-left {
-                justify-content: flex-start;
-            }
-            
-            :host ::content ul.nav-right {
-                justify-content: flex-end;
-            }
-            
         </style>
-        
-        <div class="wrapper">
-            <content select='ul[class="nav"]'></content>
+
+        <div class="left-container">
             <content select='ul[class="nav-left"]'></content>
+        </div>
+        <div class="right-container">
             <content select='ul[class="nav-right"]'></content>
         </div>
     </template>
