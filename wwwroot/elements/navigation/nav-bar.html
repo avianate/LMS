@@ -15,6 +15,15 @@
                 z-index: 1000;
             }
             
+            :host .container {
+                display: flex;
+                flex-flow: row nowrap;
+                width: 100%;
+                max-width: 1400px;
+                justify-content: space-around;
+                align-items: center;
+            }
+            
             :host .left-container, .right-container {
                 display: flex;
                 flex-flow: row nowrap;
@@ -56,12 +65,13 @@
             }
             
         </style>
-
-        <div class="left-container">
-            <content select='ul[class="nav-left"]'></content>
-        </div>
-        <div class="right-container">
-            <content select='ul[class="nav-right"]'></content>
+        <div class="container">
+            <div class="left-container">
+                <content select='ul[class="nav-left"]'></content>
+            </div>
+            <div class="right-container">
+                <content select='ul[class="nav-right"]'></content>
+            </div>
         </div>
     </template>
 
