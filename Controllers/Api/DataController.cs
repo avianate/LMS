@@ -20,9 +20,10 @@ namespace LMS.Controllers.Api
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IEnumerable<string> Get(int id)
         {
-            return "value";
+            var theId = id.ToString();
+            return new string[] { $"{theId}" };
         }
 
         // POST api/values

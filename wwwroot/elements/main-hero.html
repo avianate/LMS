@@ -39,7 +39,9 @@
             created: function () {
                 // inside of the XHR.get method, "this" refers to the XHR object
                 var self = this;
+                
                 console.log(this.localName + "# " + this.id + ' was created');
+                
                 XHR.get({
                     requestType: "GET",
                     url: "/api/data",
