@@ -5,3 +5,67 @@ h1 {
     font-weight: bold;
     font-family: "Open Sans", Helvetica, Arial, sans-serif;
 }
+
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.nowrap {
+    flex-wrap: nowrap;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.one-col {
+    flex-basis: 100%;
+}
+
+.two-cols {
+    flex-basis: 50%;
+}
+
+.three-cols {
+    flex-basis: 33.33%;
+}
+
+.four-cols {
+    flex-basis: 25%;
+}
+
+.five-cols {
+    flex-basis: 20%;
+}
+
+.six-cols {
+    flex-basis: 16.77%
+}
+
+.seven-cols {
+    flex-basis: 14.28%
+}
+
+.eight-cols {
+    flex-basis: 12.5%;
+}
+
+.nine-cols {
+    flex-basis: 11.11%;   
+}
+
+.ten-cols {
+    flex-basis: 10%;
+}
+
+.eleven-cols {
+    flex-basis: 9%;
+}
+
+.twelve-cols {
+    flex-basis: 8.33%
+}

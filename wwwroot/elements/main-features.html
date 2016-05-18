@@ -1,0 +1,30 @@
+<link rel='import' href='../../bower_components/polymer/polymer.html' />
+
+<!-- Features -->
+<link rel="import" href="./features/feature-cfis.html">
+<link rel="import" href="./features/feature-courses.html">
+<link rel="import" href="./features/feature-extras.html">
+<link rel="import" href="./features/feature-summary.html">
+<link rel="import" href="./features/feature-time.html">
+
+
+<dom-module id='main-features'>
+    <template>
+        <style>
+            
+        </style>
+
+        <feature-courses></feature-courses>
+        <feature-cfis></feature-cfis>
+        <feature-time></feature-time>
+        <feature-extras></feature-extras>
+        <feature-summary></feature-summary>
+        
+    </template>
+
+    <script>
+        Polymer({
+            is: 'main-features'
+        });
+    </script>
+</dom-module>
