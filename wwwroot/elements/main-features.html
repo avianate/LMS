@@ -11,7 +11,12 @@
 <dom-module id='main-features'>
     <template>
         <style>
-            
+            :host {
+                display: flex;
+                flex-flow: row wrap;
+                flex: 0 0 100%;
+                justify-content: center;
+            }
         </style>
 
         <feature-courses></feature-courses>

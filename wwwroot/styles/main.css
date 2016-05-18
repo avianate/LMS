@@ -22,6 +22,30 @@ h1 {
     flex-wrap: wrap;
 }
 
+.center {
+    justify-content: center;
+}
+
+.left {
+    justify-content: flex-start;
+}
+
+.right {
+    justify-content: flex-end;
+}
+
+.top {
+    align-content: flex-start;
+}
+
+.middle {
+    align-content: center;
+}
+
+.bottom {
+    align-content: flex-end;
+}
+
 .one-col {
     flex-basis: 100%;
 }
