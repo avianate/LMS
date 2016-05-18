@@ -7,19 +7,28 @@
             
             :host {
                 background-color: #fff;
+                display: flex;
+                flex-flow: row nowrap;
+                justify-content: center;
+                align-items: center;
+                padding: 0 25%;
+            }
+            
+            :host .left,
+            :host .right {
+                flex: 0 0 50%;
             }
             
         </style>
 
-        <div class="row two-cols">
-            <div class="left">
-                <h2>Online Courses</h2>
-                <p>Everything you need to know for your next checkout. Learn anywhere, anytime, and at your own pace, before you meet with your instructor</p>
-            </div>
-            <div class="right">
-                <img src="" alt="">
-                <p>Image on the right</p>
-            </div>
+        
+        <div class="row left two-cols">
+            <h2>Online Courses</h2>
+            <p>Everything you need to know for your next checkout. Learn anywhere, anytime, and at your own pace, before you meet with your instructor</p>
+        </div>
+        <div class="row right two-cols">
+            <img src="" alt="">
+            <p>Image on the right</p>
         </div>
 
     </template>
