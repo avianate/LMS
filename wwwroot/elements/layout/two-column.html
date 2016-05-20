@@ -1,0 +1,28 @@
+<link rel='import' href='../../bower_components/polymer/polymer.html' />
+
+
+<dom-module id='two-column'>
+    <template>
+        <style>
+            :host {
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: center;
+                align-items: center;
+            }
+            
+        </style>
+        
+        <div class="row center middle">
+            <content select='left-content' class="row left two-cols"></content>
+            <content select="right-content" class="row right two-cols"></content>
+        </div>
+        
+    </template>
+
+    <script>
+        Polymer({
+            is: 'two-column'
+        });
+    </script>
+</dom-module>

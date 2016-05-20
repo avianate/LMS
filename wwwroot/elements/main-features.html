@@ -1,0 +1,54 @@
+<link rel='import' href='../../bower_components/polymer/polymer.html' />
+
+<!-- Features -->
+<link rel="import" href="../layout/two-column.html">
+
+<!--
+    <link rel="import" href="./features/feature-cfis.html">
+    <link rel="import" href="./features/feature-courses.html">
+    <link rel="import" href="./features/feature-extras.html">
+    <link rel="import" href="./features/feature-summary.html">
+    <link rel="import" href="./features/feature-time.html">
+-->
+
+
+<dom-module id='main-features'>
+    <template>
+        <style>
+            :host {
+                display: flex;
+                flex-flow: row wrap;
+                flex: 1 1 100%;
+                justify-content: center;
+                align-items: center;
+                padding: 0 25%;
+            }
+        </style>
+        
+        <two-column class="row center middle one-col">
+            <div class="left-content">
+                <h2>Online Courses</h2>
+                <p>Everything you need to know for your next checkout. Learn anywhere, anytime, and at your own pace, before you meet with your instructor</p>
+            </div>
+            <div class="right-content">
+                <img src="" alt="">
+                <p>Image on the right</p>
+            </div>
+        </two-column>
+        
+    <!--
+        <feature-courses></feature-courses>
+        <feature-cfis></feature-cfis>
+        <feature-time></feature-time>
+        <feature-extras></feature-extras>
+        <feature-summary></feature-summary>
+    -->
+        
+    </template>
+
+    <script>
+        Polymer({
+            is: 'main-features'
+        });
+    </script>
+</dom-module>
