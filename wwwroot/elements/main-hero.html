@@ -30,11 +30,12 @@
                 display: flex;
                 flex-flow: row wrap;
                 flex: 0 0 100%;
-                justify-content: center;
+                justify-content: space-around;
+                align-items: center;
+                max-width: 970px;
                 margin-top: 0;
                 color: hsla(0, 0%, 100%, 0.9);
                 font-family: "Open Sans", Helvetica, sans-serif;
-                align-items: center;
             }
             
             :host div.text {
@@ -47,7 +48,7 @@
             }
             
             :host div.text > p {
-                line-height: 1.3rem;
+                line-height: 1.5rem;
                 font-weight: 100;
                 margin-bottom: 20px;
             }
@@ -72,6 +73,12 @@
                 font-size: .9rem;
             }
             
+            :host div.image > img {
+                width: 350px;
+                -webkit-filter: drop-shadow(25px 35px 25px rgba(0,0,0,0.7));
+                filter: drop-shadow(25px 35px 25px rgba(0,0,0,0.7))
+            }
+            
             :host .value1, .value2 {
                 color: hsla(0, 0%, 100%, 0.9);
                 margin: 15px auto;
@@ -89,8 +96,7 @@
                 <button class="hollow">Sign Up</button>
             </div>
             <div class="image">
-                Value 1: <span>[[value1]]</span>
-                Value 2: <span>[[value2]]</span>
+                <img src="../images/helmet_no_shadow.png">
             </div>
         </div>
         

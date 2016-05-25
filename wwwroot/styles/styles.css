@@ -59,3 +59,22 @@ h6 {
     font-size: 1rem;
 }
 
+.primary {
+    background-image: linear-gradient(-180deg, #5EB5E5 0%, #2693D9 100%);
+    border: 1px solid #BCBCBC;
+    box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.20);
+    border-radius: 6px;
+    color: #fff;
+    padding: 10px;
+    font-size: .9rem;
+}
+
+.hollow {
+    background: transparent;
+    border: 1px solid #bcbcbc;
+    border-radius: 6px;
+    color: #fff;
+    padding: 10px;
+    margin-left: 10px;
+    font-size: .9rem;
+}
