@@ -3,6 +3,15 @@
 */
 @import "reset.css";
 
+/*
+    GRADIENTS:
+    
+    background-image: linear-gradient(153deg, #1C0029 5%, #273A76 34%, #54DBFB 100%);
+    background-image: linear-gradient(163deg,#270530 10%,#196d82 36%,#fff 70%);
+    
+    
+*/
+
 
 
 /*
@@ -49,3 +58,4 @@ h5 {
 h6 {
     font-size: 1rem;
 }
+
