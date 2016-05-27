@@ -1,7 +1,9 @@
 /*
 	IMPORTS
 */
+
 @import "reset.css";
+@import "flex.css";
 
 /*
     GRADIENTS:
@@ -13,17 +15,15 @@
 */
 
 
-
 /*
     RULES
 */
 
 body {
-    font-family: "Open Sans", Helvetica, "Helvetica Neue", 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 12pt;
-    font-weight: normal;
+	font-family: "Open Sans", Helvetica, "Helvetica Neue", 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+	font-size: 12pt;
+	font-weight: normal;
 }
-
 
 h1,
 h2,
@@ -31,50 +31,77 @@ h3,
 h4,
 h5,
 h6 {
-    font-weight: bold;
-    margin-bottom: 10px;
+	font-weight: bold;
+	margin-bottom: 10px;
 }
 
 h1 {
-    font-size: 1.5rem;
+	font-size: 1.5rem;
 }
 
 h2 {
-    font-size: 1.4rem;
+	font-size: 1.4rem;
 }
 
 h3 {
-    font-size: 1.3rem;
+	font-size: 1.3rem;
 }
 
 h4 {
-    font-size: 1.2rem;
+	font-size: 1.2rem;
 }
 
 h5 {
-    font-size: 1.1rem;
+	font-size: 1.1rem;
 }
 
 h6 {
-    font-size: 1rem;
+	font-size: 1rem;
 }
 
-.primary {
-    background-image: linear-gradient(-180deg, #5EB5E5 0%, #2693D9 100%);
-    border: 1px solid #BCBCBC;
-    box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.20);
-    border-radius: 6px;
-    color: #fff;
-    padding: 10px;
-    font-size: .9rem;
+button.primary {
+	background-image: linear-gradient(-180deg, #5EB5E5 0%, #2693D9 100%);
+	border: 1px solid #BCBCBC;
+	box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.20);
+	border-radius: 6px;
+	color: #fff;
+	padding: 10px;
+	font-size: .9rem;
 }
 
-.hollow {
-    background: transparent;
-    border: 1px solid #bcbcbc;
-    border-radius: 6px;
-    color: #fff;
-    padding: 10px;
-    margin-left: 10px;
-    font-size: .9rem;
+button.hollow {
+	background: transparent;
+	border: 1px solid #bcbcbc;
+	border-radius: 6px;
+	color: #fff;
+	padding: 10px;
+	margin-left: 10px;
+	font-size: .9rem;
+}
+
+.nav-bar {
+	height: 60px;
+	position: relative;
+	border-bottom: 1px solid hsla(0, 0%, 100%, 0.2);
+	z-index: 1000;
+}
+
+.nav-bar a {
+	color: hsla(0, 0%, 100%, 0.7);
+}
+
+.nav-bar a:hover {
+	color: #fff;
+}
+
+.nav-bar .container {
+	max-width: 1400px;
+}
+
+.hero {
+	background-image: linear-gradient(to left top, rgb(76, 221, 255), rgb(59, 154, 202) 10%, rgb(45, 108, 165) 20%, rgb(42, 82, 145) 27%, rgb(40, 61, 129) 35%, rgb(34, 38, 84) 50%, rgb(30, 22, 53) 63%, rgb(12, 0, 16) 93%, rgb(0, 0, 0));
+	position: relative;
+	height: 750px;
+	margin-top: -91px;
+	z-index: 0;
 }

@@ -4,13 +4,17 @@
         <base href="/">
         <meta charset='utf-8'>
         <title>ViewBag.Title</title>
-        @RenderSection("imports", false)
-        <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+        <link rel="stylesheet" href="~/styles/styles.css">
     </head>
     <body>
         @RenderBody()
         
-        @RenderSection("scripts", false)
         @RenderSection("footer", false)
+        
+        <script src="~/scripts/XHR.js"></script>
+        <script src="~/scripts/router.js"></script>
+        <script src="~/scripts/appStart.js"></script>
+        
+        @RenderSection("scripts", false)
     </body>
 </html>

@@ -15,11 +15,11 @@
     flex-wrap: wrap;
 }
 
-.space-around {
+.around {
     justify-content: space-around;
 }
 
-.space-between {
+.between {
     justify-content: space-between;
 }
 
@@ -36,62 +36,71 @@
 }
 
 .top {
-    align-content: flex-start;
+    align-items: flex-start;
 }
 
 .middle {
-    align-content: center;
+    align-items: center;
 }
 
 .bottom {
-    align-content: flex-end;
+    align-items: flex-end;
 }
 
-.one-col,
-.one-cols {
+.full,
+.span-12 {
     flex-basis: 100%;
 }
 
-.two-cols {
+.three-fourths {
+    flex-basis: 75%;
+}
+
+.half,
+.span-6 {
     flex-basis: 50%;
 }
 
-.three-cols {
+.third,
+.span-4 {
     flex-basis: 33.33%;
 }
 
-.four-cols {
+.fourth,
+.span-3 {
     flex-basis: 25%;
 }
 
-.five-cols {
+.fifth {
     flex-basis: 20%;
 }
 
-.six-cols {
+.sixth,
+.span-2 {
     flex-basis: 16.77%
 }
 
-.seven-cols {
+.seventh {
     flex-basis: 14.28%
 }
 
-.eight-cols {
+.eighth {
     flex-basis: 12.5%;
 }
 
-.nine-cols {
+.nineth {
     flex-basis: 11.11%;   
 }
 
-.ten-cols {
+.tenth {
     flex-basis: 10%;
 }
 
-.eleven-cols {
+.eleventh {
     flex-basis: 9%;
 }
 
-.twelve-cols {
+.twelveth,
+.span-1 {
     flex-basis: 8.33%
 }

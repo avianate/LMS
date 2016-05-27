@@ -45,8 +45,6 @@ namespace LMS
             
             app.UseStaticFiles();
             
-            app.UseBowerComponents(appEnvironment);
-            
             // app.UseNodeModules();
             
             // app.useIdentity();
