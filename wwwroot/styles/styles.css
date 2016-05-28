@@ -151,9 +151,16 @@ button.hollow {
 }
 
 .courses {
-	height: 500px;
+	height: 700px;
 }
 
 .courses img {
 	width: 500px;
+	-webkit-filter: drop-shadow(4px 10px 10px hsla(0, 0%, 0%, .5));
+	filter: drop-shadow(4px 10px 10px hsla(0, 0%, 0%, 0.5));
+}
+
+div.cfi {
+	background-color: #f5f7f9;
+	height: 400px;
 }
