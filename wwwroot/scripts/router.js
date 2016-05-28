@@ -5,12 +5,15 @@ var router = (function (XHR) {
     var routes = {};
     var defaultRoute = {};
     var currentRoute = {};
-    var defaultContainer = "ajax-container";
+    var defaultContainer = ".ajax-container";
     
+    // listen for back / forward browser buttons
     window.addEventListener("popstate", route);
     window.addEventListener("DOMContentLoaded", route);
     initLinks();
     
+    // hijack click events on all anchor tags to prevent browser from loading their URLs
+    // we want our client side router to handle the links
     function initLinks () {
         var links = document.querySelectorAll("a"),
             length = links.length,
@@ -66,7 +69,7 @@ var router = (function (XHR) {
     
     /*
         checks if the browser's location has a mapped route
-        and retrieves the data from the server and passed it
+        and retrieves the data from the server and passes it
         to the controller function for the route
     */
     function route () {
