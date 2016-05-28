@@ -23,6 +23,7 @@ body {
 	font-family: "Open Sans", Helvetica, "Helvetica Neue", 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 	font-size: 12pt;
 	font-weight: normal;
+	color: hsla(0, 0%, 0%, .8);
 }
 
 h1,
@@ -57,6 +58,12 @@ h5 {
 
 h6 {
 	font-size: 1rem;
+}
+
+p {
+	font-size: 1rem;
+	line-height: 1.4rem;
+	color: hsla(0, 0%, 0%, .5);
 }
 
 button.primary {
@@ -98,10 +105,55 @@ button.hollow {
 	max-width: 1400px;
 }
 
+.container {
+	max-width: 970px;
+}
+
 .hero {
 	background-image: linear-gradient(to left top, rgb(76, 221, 255), rgb(59, 154, 202) 10%, rgb(45, 108, 165) 20%, rgb(42, 82, 145) 27%, rgb(40, 61, 129) 35%, rgb(34, 38, 84) 50%, rgb(30, 22, 53) 63%, rgb(12, 0, 16) 93%, rgb(0, 0, 0));
 	position: relative;
 	height: 750px;
 	margin-top: -91px;
+	color: hsla(0, 0%, 100%, 0.9);
+	font-family: "Open Sans", Helvetica Neue, Helvetica, sans-serif;
 	z-index: 0;
+}
+
+.hero .left-container {
+	order: 1;
+}
+
+.hero-image.helmet {
+	width: 350px;
+	-webkit-filter: drop-shadow(25px 35px 25px hsla(0, 0%, 0%, 0.7));
+	filter: drop-shadow(25px 35px 25px hsla(0, 0%, 0%, 0.7));
+}
+
+.hero div.text {
+	width: 390px;
+	color: hsla(0, 0%, 100%, 0.9);
+}
+
+.hero div.text > h1 {
+	line-height: 2rem;
+	margin-bottom: 20px;
+}
+
+.hero div.text > p {
+	line-height: 1.5rem;
+	font-weight: 100;
+	margin-bottom: 20px;
+	color: hsla(0, 0%, 100%, 0.75);
+}
+
+.hero button {
+	width: 135px
+}
+
+.courses {
+	height: 500px;
+}
+
+.courses img {
+	width: 500px;
 }

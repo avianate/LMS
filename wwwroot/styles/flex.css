@@ -1,106 +1,176 @@
 .row {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    padding: 0 10px;
-}
-
-.nowrap {
-    flex-wrap: nowrap;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
 }
 
 .column {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
 }
 
-.around {
-    justify-content: space-around;
+.nowrap {
+	flex-wrap: nowrap;
 }
 
-.between {
-    justify-content: space-between;
+.row.around {
+	justify-content: space-around;
 }
 
-.center {
-    justify-content: center;
+.row.between {
+	justify-content: space-between;
 }
 
-.left {
-    justify-content: flex-start;
+.row.center,
+.column.middle {
+	justify-content: center;
 }
 
-.right {
-    justify-content: flex-end;
+.row.left,
+.column.top {
+	justify-content: flex-start;
 }
 
-.top {
-    align-items: flex-start;
+.row.right,
+.column-bottom {
+	justify-content: flex-end;
 }
 
-.middle {
-    align-items: center;
+.row.top,
+.column.left {
+	align-items: flex-start;
 }
 
-.bottom {
-    align-items: flex-end;
+.row.middle,
+.column.center {
+	align-items: center;
+}
+
+.row.bottom,
+.column-right {
+	align-items: flex-end;
 }
 
 .full,
 .span-12 {
-    flex-basis: 100%;
+	flex-basis: 100%;
 }
 
-.three-fourths {
-    flex-basis: 75%;
+.span-11 {
+	flex-basis: 91.66%;
+}
+
+.span-10 {
+	flex-basis: 83.33%;
+}
+
+.three-fourths,
+.span-9 {
+	flex-basis: 75%;
+}
+
+.span-8 {
+	flex-basis: 66.66%;
+}
+
+.span-7 {
+	flex-basis: 58.33%;
 }
 
 .half,
 .span-6 {
-    flex-basis: 50%;
+	flex-basis: 50%;
+}
+
+.span-5 {
+	flex-basis: 41.66%;
 }
 
 .third,
 .span-4 {
-    flex-basis: 33.33%;
+	flex-basis: 33.33%;
 }
 
 .fourth,
 .span-3 {
-    flex-basis: 25%;
+	flex-basis: 25%;
 }
 
 .fifth {
-    flex-basis: 20%;
+	flex-basis: 20%;
 }
 
 .sixth,
 .span-2 {
-    flex-basis: 16.77%
+	flex-basis: 16.77%
 }
 
 .seventh {
-    flex-basis: 14.28%
+	flex-basis: 14.28%
 }
 
 .eighth {
-    flex-basis: 12.5%;
+	flex-basis: 12.5%;
 }
 
 .nineth {
-    flex-basis: 11.11%;   
+	flex-basis: 11.11%;
 }
 
 .tenth {
-    flex-basis: 10%;
+	flex-basis: 10%;
 }
 
 .eleventh {
-    flex-basis: 9%;
+	flex-basis: 9%;
 }
 
 .twelveth,
 .span-1 {
-    flex-basis: 8.33%
+	flex-basis: 8.33%
+}
+
+.offset-1 {
+	margin-left: 8.333%;
+}
+
+.offset-2 {
+	margin-left: 16.666%;
+}
+
+.offset-3 {
+	margin-left: 25%;
+}
+
+.offset-4 {
+	margin-left: 33.333%;
+}
+
+.offset-5 {
+	margin-left: 41.667%;
+}
+
+.offset-6 {
+	margin-left: 50%;
+}
+
+.offset-7 {
+	margin-left: 58.333%;
+}
+
+.offset-8 {
+	margin-left: 66.667%;
+}
+
+.offset-9 {
+	margin-left: 75%;
+}
+
+.offset-10 {
+	margin-left: 83.333%;
+}
+
+.offset-11 {
+	margin-left: 91.667%;
 }
