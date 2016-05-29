@@ -102,7 +102,7 @@ button.hollow {
 }
 
 .nav-bar .container {
-	max-width: 1400px;
+	max-width: 970px;
 }
 
 .container {
@@ -151,11 +151,17 @@ button.hollow {
 }
 
 .courses {
-	height: 700px;
+	height: 500px;
+}
+
+.courses div.container > .right-content {
+	position: relative;
+	left: 60px;
+	width: 650px;
 }
 
 .courses img {
-	width: 500px;
+	width: 900px;
 	-webkit-filter: drop-shadow(4px 10px 10px hsla(0, 0%, 0%, .5));
 	filter: drop-shadow(4px 10px 10px hsla(0, 0%, 0%, 0.5));
 }
@@ -163,4 +169,8 @@ button.hollow {
 div.cfi {
 	background-color: #f5f7f9;
 	height: 400px;
+}
+
+div.cfi img.cfi-stuff {
+	width: 500px;
 }
