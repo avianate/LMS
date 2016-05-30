@@ -170,3 +170,17 @@ div.cfi {
 div.cfi img.cfi-stuff {
 	width: 500px;
 }
+
+div.time {
+	height: 500px;
+}
+
+div.time div.container div.left-content {
+	max-width: 400px;
+	margin-right: 50px
+}
+
+div.extras {
+	height: 700px;
+	background-image: radial-gradient(circle farthest-side at right bottom, #fefdfe 5%, #f8cdda 25%, #1d2b64 80%, #0e153a 98%);
+}
