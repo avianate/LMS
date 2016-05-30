@@ -54,81 +54,82 @@
 
 .full,
 .span-12 {
-	flex-basis: 100%;
+	flex: 1 0 100%;
 }
 
 .span-11 {
-	flex-basis: 91.66%;
+	flex: 1 0 91.66%;
 }
 
 .span-10 {
-	flex-basis: 83.33%;
+	flex: 1 0 83.33%;
 }
 
 .three-fourths,
 .span-9 {
-	flex-basis: 75%;
+	flex: 1 0 75%;
 }
 
+.two-thirds,
 .span-8 {
-	flex-basis: 66.66%;
+	flex: 1 0 66.66%;
 }
 
 .span-7 {
-	flex-basis: 58.33%;
+	flex: 1 0 58.33%;
 }
 
 .half,
 .span-6 {
-	flex-basis: 50%;
+	flex: 1 0 50%;
 }
 
 .span-5 {
-	flex-basis: 41.66%;
+	flex: 1 0 41.66%;
 }
 
 .third,
 .span-4 {
-	flex-basis: 33.33%;
+	flex: 1 0 33.33%;
 }
 
 .fourth,
 .span-3 {
-	flex-basis: 25%;
+	flex: 1 0 25%;
 }
 
 .fifth {
-	flex-basis: 20%;
+	flex: 1 0 20%;
 }
 
 .sixth,
 .span-2 {
-	flex-basis: 16.77%
+	flex: 1 0 16.77%
 }
 
 .seventh {
-	flex-basis: 14.28%
+	flex: 1 0 14.28%
 }
 
 .eighth {
-	flex-basis: 12.5%;
+	flex: 1 0 12.5%;
 }
 
 .nineth {
-	flex-basis: 11.11%;
+	flex: 1 0 11.11%;
 }
 
 .tenth {
-	flex-basis: 10%;
+	flex: 1 0 10%;
 }
 
 .eleventh {
-	flex-basis: 9%;
+	flex: 1 0 9%;
 }
 
 .twelveth,
 .span-1 {
-	flex-basis: 8.33%
+	flex: 1 0 8.33%
 }
 
 .offset-1 {

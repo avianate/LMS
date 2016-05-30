@@ -151,19 +151,15 @@ button.hollow {
 }
 
 .courses {
-	height: 500px;
+	height: 700px;
 }
 
-.courses div.container > .right-content {
-	position: relative;
-	left: 60px;
-	width: 650px;
-}
-
-.courses img {
-	width: 900px;
+.courses .right-content img {
+	height: 700px;
+	margin-top: -100px;
 	-webkit-filter: drop-shadow(4px 10px 10px hsla(0, 0%, 0%, .5));
 	filter: drop-shadow(4px 10px 10px hsla(0, 0%, 0%, 0.5));
+	margin: 0 -100px;
 }
 
 div.cfi {
