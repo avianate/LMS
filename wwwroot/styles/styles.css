@@ -183,4 +183,10 @@ div.time div.container div.left-content {
 div.extras {
 	height: 700px;
 	background-image: radial-gradient(circle farthest-side at right bottom, #fefdfe 5%, #f8cdda 25%, #1d2b64 80%, #0e153a 98%);
+	color: #fff;
+}
+
+div.extras p {
+	color: #fff;
+	font-weight: 100;
 }

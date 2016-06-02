@@ -94,6 +94,7 @@
 }
 
 .fourth,
+.quarter,
 .span-3 {
 	flex: 1 0 25%;
 }
