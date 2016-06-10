@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Hosting;
-using Microsoft.AspNet.Http;
-using Microsoft.AspNet.Routing;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.PlatformAbstractions;
+using Microsoft.Extensions.Logging;
 
 namespace LMS
 {
@@ -16,11 +16,20 @@ namespace LMS
     {
         public IConfiguration Configuration { get; set; }
         
-        public Startup()
+        public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
-                                .AddJsonFile("appsettings.json");
-            
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+
+            if (env.IsDevelopment())
+            {
+                // For more details on using the user secret store see https://go.microsoft.com/fwlink/?LinkID=532709
+                builder.AddUserSecrets();
+            }
+
+            builder.AddEnvironmentVariables();
             Configuration = builder.Build();
         }
         
@@ -32,36 +41,31 @@ namespace LMS
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationEnvironment appEnvironment)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            app.UseIISPlatformHandler();
+            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            loggerFactory.AddDebug();
 
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
+                app.UseBrowserLink();
             }
-            
-            app.UseFileServer();
-            
-            app.UseStaticFiles();
-            
-            // app.UseNodeModules();
-            
-            // app.useIdentity();
-            
-            app.UseMvc(ConfigureRoutes);
-        }
-        
-        private void ConfigureRoutes(IRouteBuilder route)
-        {
-            route.MapRoute(
-                "CatchAll",
-                "{*url}",
-                new { Controller = "Home", Action = "Index" }
-            );
-        }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+            }
 
-        // Entry point for the application.
-        public static void Main(string[] args) => Microsoft.AspNet.Hosting.WebApplication.Run<Startup>(args);
+            app.UseStaticFiles();
+
+            app.UseMvc(route =>
+            {
+                route.MapRoute(
+                    "CatchAll",
+                    "{*url}",
+                    new { Controller = "Home", Action = "Index" });
+            });
+        }
     }
 }
