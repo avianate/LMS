@@ -86,6 +86,16 @@ button.hollow {
 	font-size: .9rem;
 }
 
+.container {
+	padding: 20px 0;
+	margin: 0 auto;
+}
+
+.center-container {
+	max-width: 970px;
+	padding: 0 0 20px 0;
+}
+
 .nav-bar {
 	height: 60px;
 	position: relative;
@@ -101,12 +111,9 @@ button.hollow {
 	color: #fff;
 }
 
-.nav-bar .container {
-	max-width: 970px;
-}
-
-.container {
-	max-width: 970px;
+.nav-bar.center-container {
+	margin: 0 auto;
+	padding: 20px;
 }
 
 .hero {
@@ -117,10 +124,6 @@ button.hollow {
 	color: hsla(0, 0%, 100%, 0.9);
 	font-family: "Open Sans", Helvetica Neue, Helvetica, sans-serif;
 	z-index: 0;
-}
-
-.hero .left-container {
-	order: 1;
 }
 
 .hero-image.helmet {
@@ -151,15 +154,19 @@ button.hollow {
 }
 
 .courses {
-	height: 700px;
+/*	height: 700px;*/
+}
+
+.courses .left-content {
+	padding: 0;
 }
 
 .courses .right-content img {
-	height: 700px;
-	margin-top: -100px;
+	width: 100%;
+/*	margin-top: -100px;*/
 	-webkit-filter: drop-shadow(4px 10px 10px hsla(0, 0%, 0%, .5));
 	filter: drop-shadow(4px 10px 10px hsla(0, 0%, 0%, 0.5));
-	margin: 0 -100px;
+/*	margin: 0 -100px;*/
 }
 
 div.cfi {
@@ -189,4 +196,9 @@ div.extras {
 div.extras p {
 	color: #fff;
 	font-weight: 100;
+}
+
+div.summary .right-content {
+	height: 700px;
+	background: hsla(0, 0%, 0%, 0.1);
 }

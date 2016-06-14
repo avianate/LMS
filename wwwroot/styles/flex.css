@@ -33,7 +33,7 @@
 }
 
 .row.right,
-.column-bottom {
+.column.bottom {
 	justify-content: flex-end;
 }
 
@@ -48,7 +48,7 @@
 }
 
 .row.bottom,
-.column-right {
+.column.right {
 	align-items: flex-end;
 }
 
@@ -128,7 +128,7 @@
 	flex: 1 0 9%;
 }
 
-.twelveth,
+.twelfth,
 .span-1 {
 	flex: 1 0 8.33%
 }
@@ -175,4 +175,12 @@
 
 .offset-11 {
 	margin-left: 91.667%;
+}
+
+.left-content.right {
+	padding-right: 100px;
+}
+
+.right-content.left {
+	padding-left: 100px;
 }
