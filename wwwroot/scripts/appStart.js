@@ -9,7 +9,10 @@
     
     router.mapRoute({
         route: "/blog",
-        templateUrl: "/app/blog.html"
+        templateUrl: "/app/blog.html",
+        controller: function (data) {
+            handleResponse(data, "/scripts/blog/blog.js");
+        }
     });
     
     router.mapRoute({
@@ -32,9 +35,17 @@
         templateUrl: "/app/account/signout.html"
     });
     
-    function handleDefaultResponse() {
-        var container = document.querySelector("ajax-container");
-        container.innerHTML = "";
+    function handleResponse(data, scriptUrl) {
+
+        var container = document.querySelector(".ajax-container");
+        container.innerHTML = data;
+
+        if (scriptUrl !== undefined || scriptUrl !== "") {
+            var script = document.createElement("script");
+            
+            script.src = scriptUrl;
+            document.body.appendChild(script);
+        }
     }
     
 })(router, XHR);
