@@ -93,7 +93,7 @@ var router = (function (XHR) {
             XHR.get({
                 requestType: "GET",
                 url: currentRoute.templateUrl,
-                success: currentRoute.controller || setContent
+                success: controller
             });
             
             replaceHistory(url.replace("/", ""));
