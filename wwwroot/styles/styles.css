@@ -203,10 +203,32 @@ div.summary .right-content {
 	background: hsla(0, 0%, 0%, 0.1);
 }
 
-div.blog {
-	padding: 20px;
+.blog.container {
+	background: hsla(0, 0%, 0%, 0.1);
+	padding: 20px 50px;
 }
 
-div.blog .latest {
-	margin: 20px;
+.blog .header.column {
+	height: 60px;
+	margin-bottom: 20px;
+}
+
+.blog .column {
+	height: 500px;
+}
+
+.blog .column .post.row {
+	height: 100px;
+	align-self: center;
+	padding: 20px;
+	margin-top: 20px;
+	width: 100%;
+}
+
+.blog .column .post.row .left {
+	width: 30%;
+}
+
+.blog .column .post.row .right {
+	width: 70%;
 }
