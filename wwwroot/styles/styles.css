@@ -202,3 +202,11 @@ div.summary .right-content {
 	height: 700px;
 	background: hsla(0, 0%, 0%, 0.1);
 }
+
+div.blog {
+	padding: 20px;
+}
+
+div.blog .latest {
+	margin: 20px;
+}
