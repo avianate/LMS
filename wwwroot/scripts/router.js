@@ -27,13 +27,17 @@ var router = (function (XHR) {
             link.addEventListener("click", function (e) {
                 e.preventDefault();
                 e.stopPropagation();
+
+                // start fading out the ajax container before each request is sent
                 var container = getContainer();
                 container.classList.add("fade-out");
+                
                 pushHistory(e.currentTarget);
             });
         }
     }
     
+    // updates the browser history
     function pushHistory(target) {
         var targetUrl = target.getAttribute("href");
         var prettyUrl = targetUrl === "/" ? "/" : targetUrl.replace("/", "");
@@ -43,6 +47,7 @@ var router = (function (XHR) {
         route();
     };
     
+    // updates the browser history
     function replaceHistory(title) {
         history.replaceState(title, title, title);
         document.title = title;
@@ -80,6 +85,7 @@ var router = (function (XHR) {
             container,
             controller;
 
+        // add fade in / out effect if it was a browser back / forward navigation
         if (e !== undefined && e.type === "popstate") {
             var container = getContainer();
             container.classList.add("fade-out");
@@ -109,6 +115,7 @@ var router = (function (XHR) {
         }
     };
     
+    // used if there is no "controller" listed on the route object
     function setContent(data) {
         var container = getContainer(currentRoute.container);
         
@@ -117,8 +124,10 @@ var router = (function (XHR) {
         } else {
             console.log("No container to place content into")
         }
-    }
+    };
 
+    // returns the object for the passed in selector
+    // will grab the defaultContainer if no selector is passed in
     function getContainer(selector) {
         var container = selector !== "" 
                         && selector !== undefined 
@@ -127,12 +136,14 @@ var router = (function (XHR) {
                             : document.querySelector(defaultContainer);
 
         return container;
-    }
+    };
     
+    // gets the routes
     function getRoutes () {
         return routes;
     };
     
+    // publicly exposed methods
     return {
         mapRoute: mapRoute,
         route: route,
