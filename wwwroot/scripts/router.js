@@ -75,10 +75,15 @@ var router = (function (XHR) {
         and retrieves the data from the server and passes it
         to the controller function for the route
     */
-    function route () {
+    function route (e) {
         var url,
             container,
             controller;
+
+        if (e !== undefined && e.type === "popstate") {
+            var container = getContainer();
+            container.classList.add("fade-out");
+        }
             
         url = location.pathname.toLowerCase() || "/";
         currentRoute = routes[url] || "";
