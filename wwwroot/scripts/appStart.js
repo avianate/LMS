@@ -17,22 +17,34 @@
     
     router.mapRoute({
         route: "/courses",
-        templateUrl: "/app/courses.html"
+        templateUrl: "/app/courses.html",
+        controller: function (data) {
+            handleResponse(data);
+        }
     });
     
     router.mapRoute({
         route: "/signup",
-        templateUrl: "/app/account/register.html"
+        templateUrl: "/app/account/register.html",
+        controller: function (data) {
+            handleResponse(data);
+        }
     });
     
     router.mapRoute({
         route: "/signin",
-        templateUrl: "/app/account/signin.html"
+        templateUrl: "/app/account/signin.html",
+        controller: function (data) {
+            handleResponse(data);
+        }
     });
     
     router.mapRoute({
         route: "/signout",
-        templateUrl: "/app/account/signout.html"
+        templateUrl: "/app/account/signout.html",
+        controller: function (data) {
+            handleResponse(data);
+        }
     });
     
     function handleResponse(data, scriptUrl) {
@@ -40,11 +52,19 @@
         var container = document.querySelector(".ajax-container");
         container.innerHTML = data;
 
-        if (scriptUrl !== undefined || scriptUrl !== "") {
-            var script = document.createElement("script");
+        var script = document.querySelector("#dynamic");
+
+        if (script !== undefined && script !== null) {
+            document.body.removeChild(script);
+        }
+
+        if (scriptUrl !== "" && scriptUrl !== undefined && scriptUrl !== null) {
+            var newScript = document.createElement("script");
+
+            newScript.id = "dynamic";
+            newScript.src = scriptUrl;
             
-            script.src = scriptUrl;
-            document.body.appendChild(script);
+            document.body.appendChild(newScript);
         }
     }
     
