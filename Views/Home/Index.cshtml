@@ -1,29 +1,30 @@
 @{
-    ViewBag.Title = "Welcome";
+    ViewBag.Title = "Welcome! | Aircraft Checkout";
 }
 
-@section Imports{
-    <link rel="import" href="~/elements/elements.html">
-}
-
-<!-- Navigation section -->
-<nav-bar>
-    <ul class="nav-left">
-        <li><a href="/">Home</a></li>
-        <li><a href="/features">Features</a></li>
-        <li><a href="/courses">Pricing</a></li>
-        <li><a href="/blog">Blog</a></li>
-    </ul>
-    <ul class="nav-right">
-        <li><a href="/signin">Sign In</a></li>
-        <li><a href="/signout">Sign Up</a></li>
-    </ul>
-</nav-bar>
+<!-- Nav Section -->
+<div class="nav-bar center-container row center middle full">
+    <div class="left-content row right middle half">
+        <ul class="nav-left row nowrap between half">
+            <li><a href="/">Home</a></li>
+            <li><a href="/features">Features</a></li>
+            <li><a href="/courses">Pricing</a></li>
+            <li><a href="/blog">Blog</a></li>
+        </ul>
+    </div>
+    <div class="center-content row center middle quarter"></div>
+    <div class="right-content row left middle quarter">
+        <ul class="nav-right row nowrap between half">
+            <li><a href="/signin">Sign In</a></li>
+            <li><a href="/signout">Sign Up</a></li>
+        </ul>
+    </div>
+</div>
 
 <!-- Main Content -->
-<ajax-container>
+<div class="ajax-container row center full">
     Loading...
-</ajax-container>
+</div>
 
 <!-- footer -->
 

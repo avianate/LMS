@@ -1,97 +1,186 @@
 .row {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    padding: 0 10px;
-}
-
-.nowrap {
-    flex-wrap: nowrap;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
 }
 
 .column {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
 }
 
-.space-around {
-    justify-content: space-around;
+.nowrap {
+	flex-wrap: nowrap;
 }
 
-.space-between {
-    justify-content: space-between;
+.row.around {
+	justify-content: space-around;
 }
 
-.center {
-    justify-content: center;
+.row.between {
+	justify-content: space-between;
 }
 
-.left {
-    justify-content: flex-start;
+.row.center,
+.column.middle {
+	justify-content: center;
 }
 
-.right {
-    justify-content: flex-end;
+.row.left,
+.column.top {
+	justify-content: flex-start;
 }
 
-.top {
-    align-content: flex-start;
+.row.right,
+.column.bottom {
+	justify-content: flex-end;
 }
 
-.middle {
-    align-content: center;
+.row.top,
+.column.left {
+	align-items: flex-start;
 }
 
-.bottom {
-    align-content: flex-end;
+.row.middle,
+.column.center {
+	align-items: center;
 }
 
-.one-col,
-.one-cols {
-    flex-basis: 100%;
+.row.bottom,
+.column.right {
+	align-items: flex-end;
 }
 
-.two-cols {
-    flex-basis: 50%;
+.full,
+.span-12 {
+	flex: 1 0 100%;
 }
 
-.three-cols {
-    flex-basis: 33.33%;
+.span-11 {
+	flex: 1 0 91.66%;
 }
 
-.four-cols {
-    flex-basis: 25%;
+.span-10 {
+	flex: 1 0 83.33%;
 }
 
-.five-cols {
-    flex-basis: 20%;
+.three-fourths,
+.span-9 {
+	flex: 1 0 75%;
 }
 
-.six-cols {
-    flex-basis: 16.77%
+.two-thirds,
+.span-8 {
+	flex: 1 0 66.66%;
 }
 
-.seven-cols {
-    flex-basis: 14.28%
+.span-7 {
+	flex: 1 0 58.33%;
 }
 
-.eight-cols {
-    flex-basis: 12.5%;
+.half,
+.span-6 {
+	flex: 1 0 50%;
 }
 
-.nine-cols {
-    flex-basis: 11.11%;   
+.span-5 {
+	flex: 1 0 41.66%;
 }
 
-.ten-cols {
-    flex-basis: 10%;
+.third,
+.span-4 {
+	flex: 1 0 33.33%;
 }
 
-.eleven-cols {
-    flex-basis: 9%;
+.fourth,
+.quarter,
+.span-3 {
+	flex: 1 0 25%;
 }
 
-.twelve-cols {
-    flex-basis: 8.33%
+.fifth {
+	flex: 1 0 20%;
+}
+
+.sixth,
+.span-2 {
+	flex: 1 0 16.77%
+}
+
+.seventh {
+	flex: 1 0 14.28%
+}
+
+.eighth {
+	flex: 1 0 12.5%;
+}
+
+.nineth {
+	flex: 1 0 11.11%;
+}
+
+.tenth {
+	flex: 1 0 10%;
+}
+
+.eleventh {
+	flex: 1 0 9%;
+}
+
+.twelfth,
+.span-1 {
+	flex: 1 0 8.33%
+}
+
+.offset-1 {
+	margin-left: 8.333%;
+}
+
+.offset-2 {
+	margin-left: 16.666%;
+}
+
+.offset-3 {
+	margin-left: 25%;
+}
+
+.offset-4 {
+	margin-left: 33.333%;
+}
+
+.offset-5 {
+	margin-left: 41.667%;
+}
+
+.offset-6 {
+	margin-left: 50%;
+}
+
+.offset-7 {
+	margin-left: 58.333%;
+}
+
+.offset-8 {
+	margin-left: 66.667%;
+}
+
+.offset-9 {
+	margin-left: 75%;
+}
+
+.offset-10 {
+	margin-left: 83.333%;
+}
+
+.offset-11 {
+	margin-left: 91.667%;
+}
+
+.left-content.right {
+	padding-right: 100px;
+}
+
+.right-content.left {
+	padding-left: 100px;
 }
