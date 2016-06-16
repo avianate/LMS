@@ -3,7 +3,7 @@ using LMS.Entities;
 
 namespace LMS.Data
 {
-    public interface IRepository
+    public interface ILMSRepository
     {
         IEnumerable<Post> GetAllPosts();
 

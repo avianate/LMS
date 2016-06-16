@@ -4,8 +4,15 @@ using LMS.Entities;
 
 namespace LMS.Data
 {
-    public class Repository : IRepository
+    public class LMSRepository : ILMSRepository
     {
+        private LMSContext _context;
+
+        public LMSRepository(LMSContext context)
+        {
+            _context = context;
+        }
+
         public IEnumerable<Category> GetAllCategories()
         {
             throw new NotImplementedException();

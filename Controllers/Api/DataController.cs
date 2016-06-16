@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using LMS.Data;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
@@ -8,11 +9,20 @@ namespace LMS.Controllers.Api
     [Route("api/[controller]")]
     public class DataController : Controller
     {
+        private ILMSRepository _repo;
+
+        public DataController(ILMSRepository repo)
+        {
+            _repo = repo;
+        }
+        
         // GET: api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public JsonResult Get()
         {
-            return new string[] { "firstValue", "secondValue" };
+            var posts = _repo.GetAllPublishedPosts();
+
+            return Json(posts);
         }
 
         // GET api/values/5
