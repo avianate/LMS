@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LMS.Data;
+using LMS.Migrations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -38,10 +40,16 @@ namespace LMS
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            var connection = @"Server=(localdb)\mssqllocaldb;Database=LMSdb;Trusted_Connection=True;";
+            services.AddDbContext<LMSContext>(options => options.UseSqlServer(connection));
+
+            services.AddTransient<Seeder>();
+            services.AddScoped<Repository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, Seeder seeder)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -66,6 +74,8 @@ namespace LMS
                     "{*url}",
                     new { Controller = "Home", Action = "Index" });
             });
+
+            seeder.EnsureSeedData();
         }
     }
 }
