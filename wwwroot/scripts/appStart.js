@@ -3,7 +3,8 @@
 
     var container = getAjaxContainer();
     container.addEventListener("transitionend", fadeIn);
-        
+    
+    // ROUTES
     router.mapRoute({
         route: "/",
         templateUrl: "/app/default.html",
@@ -59,6 +60,9 @@
         }
     });
     
+    // FUNCTIONS
+
+    // Handles display of the ajax data 
     function handleResponse(data, scriptUrl) {
         if (container.classList.contains("fade-out")) {
             container.addEventListener("load", function loadData () {
@@ -72,6 +76,7 @@
         }
     };
 
+    // Dynamic script loading
     function setScripts (scriptUrl) {
         var script = document.querySelector("#dynamic");
 
@@ -89,6 +94,7 @@
         }
     };
 
+    // Fade in ajax data
     function fadeIn () {
         if (container.classList.contains("fade-out")) {
             var event = new CustomEvent("load");
@@ -98,6 +104,7 @@
         }    
     };
 
+    // change navbar link colors to light or dark
     function changeNavbar (shouldBeDark) {
         var navbar = document.querySelector("div.nav-bar.center-container");
         var isDark = navbar.classList.contains("dark") ? true : false;
@@ -109,6 +116,7 @@
         }
     };
 
+    // Get the ajax container
     function getAjaxContainer () {
         return document.querySelector(".ajax-container");
     }
