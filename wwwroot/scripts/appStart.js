@@ -1,5 +1,8 @@
 (function (router, XHR) {
     "use strict";
+
+    var container = getAjaxContainer();
+    container.addEventListener("transitionend", fadeIn);
         
     router.mapRoute({
         route: "/",
@@ -57,15 +60,19 @@
     });
     
     function handleResponse(data, scriptUrl) {
-        var container = document.querySelector(".ajax-container");
-        container.innerHTML = data;
-
         if (container.classList.contains("fade-out")) {
-            container.classList.remove("fade-out");
+            container.addEventListener("load", function loadData () {
+                container.innerHTML = data;
+                setScripts(scriptUrl);
+                container.removeEventListener("load", loadData);
+            });
+        } else {
+            container.innerHTML = data;
+            setScripts(scriptUrl);
         }
+    };
 
-        container.classList.add("fade-in");
-
+    function setScripts (scriptUrl) {
         var script = document.querySelector("#dynamic");
 
         if (script !== undefined && script !== null) {
@@ -82,6 +89,15 @@
         }
     };
 
+    function fadeIn () {
+        if (container.classList.contains("fade-out")) {
+            var event = new CustomEvent("load");
+            container.dispatchEvent(event);
+
+            container.classList.remove("fade-out");
+        }    
+    };
+
     function changeNavbar (shouldBeDark) {
         var navbar = document.querySelector("div.nav-bar.center-container");
         var isDark = navbar.classList.contains("dark") ? true : false;
@@ -91,6 +107,10 @@
         } else if (isDark && !shouldBeDark) {
             navbar.classList.remove("dark");
         }
+    };
+
+    function getAjaxContainer () {
+        return document.querySelector(".ajax-container");
     }
     
 })(router, XHR);

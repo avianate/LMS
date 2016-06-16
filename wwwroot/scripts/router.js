@@ -27,6 +27,8 @@ var router = (function (XHR) {
             link.addEventListener("click", function (e) {
                 e.preventDefault();
                 e.stopPropagation();
+                var container = getContainer();
+                container.classList.add("fade-out");
                 pushHistory(e.currentTarget);
             });
         }
@@ -90,73 +92,34 @@ var router = (function (XHR) {
         
         // if we have a route object and it's container element
         if (currentRoute.templateUrl !== null && currentRoute.templateUrl !== "") {   
-            
-            // fade out the current content so the new stuff can fade in
-            fadeOut(getContainer(currentRoute.container));
 
             // get the data from the templateUrl
             XHR.get({
                 requestType: "GET",
                 url: currentRoute.templateUrl,
-                success: controller,
-                error: unsetContent
+                success: controller
             });
             
             replaceHistory(url.replace("/", ""));
         }
     };
-
-    function fadeOut(container) {
-        if (transitionHasEnded) {
-
-            transitionHasEnded = false;
-
-            if (!container.classList.contains("fade-out")) {
-                container.classList.remove("fade-in");
-                container.classList.add("fade-out");
-
-                container.addEventListener("transitionend", function () { transitionHasEnded = true; }, false);
-            } else {
-                container.addEventListener("transistionend", fadeOut(this.container), false);
-            }
-        }
-    }
-
-    function fadeIn(container) {
-        if (transitionHasEnded) {
-
-            transitionHasEnded = false;
-
-            if (!container.classList.contains("fade-in")) {
-                container.classList.remove("fade-out");
-                container.classList.add("fade-in");
-
-                container.addEventListener("transitionend", function () { transitionHasEnded = true; }, false);
-            }
-        } else {
-            container.addEventListener("transitionend", fadeIn(this.container), false);
-        }
-    }
-
-    function unsetContent(data) {
-        var container = getContainer(currentRoute.container);
-
-        fadeIn(container);
-    }
     
     function setContent(data) {
         var container = getContainer(currentRoute.container);
         
         if (container) {
             container.innerHTML = data;
-            fadeIn(container);
         } else {
             console.log("No container to place content into")
         }
     }
 
     function getContainer(selector) {
-        var container = selector !== "" && selector !== undefined && selector !== null ? document.querySelector(selector) : "";
+        var container = selector !== "" 
+                        && selector !== undefined 
+                        && selector !== null 
+                            ? document.querySelector(selector) 
+                            : document.querySelector(defaultContainer);
 
         return container;
     }
