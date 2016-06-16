@@ -105,15 +105,45 @@ button.hollow {
 
 .nav-bar a {
 	color: hsla(0, 0%, 100%, 0.7);
+
+	-webkit-transition: color 0.2s ease-in-out;
+	-moz-transition: color 0.2s ease-in-out;
+	transition: color 0.2s ease-in-out;
 }
 
 .nav-bar a:hover {
 	color: #fff;
 }
 
+.nav-bar.dark a {
+	color: hsla(0, 0%, 0%, 0.7);
+
+	-webkit-transition: color 0.2s ease-in-out;
+	-moz-transition: color 0.2s ease-in-out;
+	transition: color 0.2s ease-in-out;
+}
+
+.nav-bar.dark a:hover {
+	color: hsla(0, 0%, 0%, 1);
+}
+
 .nav-bar.center-container {
 	margin: 0 auto;
 	padding: 20px;
+}
+
+.ajax-container {
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+}
+
+.ajax-container.fade-in {
+	opacity: 1;
+}
+
+.ajax-container.fade-out {
+	opacity: 0;
 }
 
 .hero {
@@ -153,20 +183,14 @@ button.hollow {
 	width: 135px
 }
 
-.courses {
-/*	height: 700px;*/
-}
-
 .courses .left-content {
 	padding: 0;
 }
 
 .courses .right-content img {
 	width: 100%;
-/*	margin-top: -100px;*/
 	-webkit-filter: drop-shadow(4px 10px 10px hsla(0, 0%, 0%, .5));
 	filter: drop-shadow(4px 10px 10px hsla(0, 0%, 0%, 0.5));
-/*	margin: 0 -100px;*/
 }
 
 div.cfi {

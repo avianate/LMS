@@ -6,6 +6,7 @@ var router = (function (XHR) {
     var defaultRoute = {};
     var currentRoute = {};
     var defaultContainer = ".ajax-container";
+    var transitionHasEnded = true;
     
     // listen for back / forward browser buttons
     window.addEventListener("popstate", route);
@@ -50,7 +51,7 @@ var router = (function (XHR) {
         obj.templateUrl          // the url to get the html file from the server or the url to hit the server's controller and action method
         obj.controller           // function used for setting properties or passing data to the template
         obj.container            // the container element's tag, ID, or class
-        obj.default              // a boolean to flag to set this as the default route
+        obj.default              // a boolean flag to set this as the default route
     */
     // method to add a new client side route
     function mapRoute (obj) {
@@ -79,35 +80,85 @@ var router = (function (XHR) {
             
         url = location.pathname.toLowerCase() || "/";
         currentRoute = routes[url] || "";
-        controller = currentRoute.controller || setContent;
             
         // if we don't have a valid route object return home
         if (currentRoute === "" || !currentRoute) {
             currentRoute = defaultRoute;
         }
+
+        controller = currentRoute.controller || setContent;
         
         // if we have a route object and it's container element
         if (currentRoute.templateUrl !== null && currentRoute.templateUrl !== "") {   
-                     
+            
+            // fade out the current content so the new stuff can fade in
+            fadeOut(getContainer(currentRoute.container));
+
             // get the data from the templateUrl
             XHR.get({
                 requestType: "GET",
                 url: currentRoute.templateUrl,
-                success: controller
+                success: controller,
+                error: unsetContent
             });
             
             replaceHistory(url.replace("/", ""));
         }
     };
+
+    function fadeOut(container) {
+        if (transitionHasEnded) {
+
+            transitionHasEnded = false;
+
+            if (!container.classList.contains("fade-out")) {
+                container.classList.remove("fade-in");
+                container.classList.add("fade-out");
+
+                container.addEventListener("transitionend", function () { transitionHasEnded = true; }, false);
+            } else {
+                container.addEventListener("transistionend", fadeOut(this.container), false);
+            }
+        }
+    }
+
+    function fadeIn(container) {
+        if (transitionHasEnded) {
+
+            transitionHasEnded = false;
+
+            if (!container.classList.contains("fade-in")) {
+                container.classList.remove("fade-out");
+                container.classList.add("fade-in");
+
+                container.addEventListener("transitionend", function () { transitionHasEnded = true; }, false);
+            }
+        } else {
+            container.addEventListener("transitionend", fadeIn(this.container), false);
+        }
+    }
+
+    function unsetContent(data) {
+        var container = getContainer(currentRoute.container);
+
+        fadeIn(container);
+    }
     
     function setContent(data) {
-        var container = currentRoute.container != "" ? document.querySelector(currentRoute.container) : "";
+        var container = getContainer(currentRoute.container);
         
         if (container) {
             container.innerHTML = data;
+            fadeIn(container);
         } else {
             console.log("No container to place content into")
         }
+    }
+
+    function getContainer(selector) {
+        var container = selector !== "" && selector !== undefined && selector !== null ? document.querySelector(selector) : "";
+
+        return container;
     }
     
     function getRoutes () {
