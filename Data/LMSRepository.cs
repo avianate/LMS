@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using LMS.Entities;
 
 namespace LMS.Data
@@ -30,12 +31,19 @@ namespace LMS.Data
 
         public IEnumerable<Post> GetAllPosts()
         {
-            throw new NotImplementedException();
+            var posts = _context.Posts.OrderBy(t => t.Title).ToList();
+
+            return posts;
         }
 
         public IEnumerable<Post> GetAllPublishedPosts()
         {
-            throw new NotImplementedException();
+            var posts = _context.Posts
+                                    .Where(p => p.IsPublished)
+                                    .OrderBy(t => t.Title)
+                                    .ToList();
+
+            return posts;
         }
 
         public IEnumerable<Tag> GetAllTags()
