@@ -1,12 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using LMS.Data;
 using LMS.Migrations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -41,11 +36,12 @@ namespace LMS
         {
             services.AddMvc();
 
-            var connection = @"Server=(localdb)\mssqllocaldb;Database=LMSdb;Trusted_Connection=True;";
-            services.AddDbContext<LMSContext>(options => options.UseSqlServer(connection));
+            // var connection = @"Server=(localdb)\mssqllocaldb;Database=LMSdb;Trusted_Connection=True;";
+            var connection = @"Data Source=LMSdb.db";
+            services.AddDbContext<LMSContext>(options => options.UseSqlite(connection));
 
             services.AddTransient<Seeder>();
-            services.AddScoped<LMSRepository>();
+            services.AddScoped<ILMSRepository, LMSRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
