@@ -10,22 +10,24 @@ namespace LMS.Controllers.Api
     public class DataController : Controller
     {
         private ILMSRepository _repo;
-
+        
         public DataController(ILMSRepository repo)
         {
             _repo = repo;
         }
-        
-        // GET: api/values
+
+        // GET: api/data
         [HttpGet]
         public JsonResult Get()
         {
             var posts = _repo.GetAllPublishedPosts();
 
             return Json(posts);
+
+            // return new string[] {"value1", "value2" };
         }
 
-        // GET api/values/5
+        // GET api/data/5
         [HttpGet("{id}")]
         public IEnumerable<string> Get(int id)
         {
@@ -33,19 +35,19 @@ namespace LMS.Controllers.Api
             return new string[] { $"{theId}" };
         }
 
-        // POST api/values
+        // POST api/data
         [HttpPost]
         public void Post([FromBody]string value)
         {
         }
 
-        // PUT api/values/5
+        // PUT api/data/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody]string value)
         {
         }
 
-        // DELETE api/values/5
+        // DELETE api/data/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
