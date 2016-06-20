@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using LMS.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace LMS.Data
 {
@@ -39,6 +40,9 @@ namespace LMS.Data
         public IEnumerable<Post> GetAllPublishedPosts()
         {
             var posts = _context.Posts
+                                    .Include(t => t.PostTags)
+                                    .Include(c => c.PostCategories)
+                                    .Include(pc => pc.PostComments)
                                     .Where(p => p.IsPublished)
                                     .OrderBy(t => t.Title)
                                     .ToList();
