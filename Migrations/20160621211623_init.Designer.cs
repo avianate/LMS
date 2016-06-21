@@ -8,14 +8,13 @@ using LMS.Data;
 namespace LMS.Migrations
 {
     [DbContext(typeof(LMSContext))]
-    [Migration("20160617022129_mac")]
-    partial class mac
+    [Migration("20160621211623_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.0.0-rc2-20896")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "1.0.0-rc2-20901");
 
             modelBuilder.Entity("LMS.Entities.Category", b =>
                 {
@@ -81,11 +80,7 @@ namespace LMS.Migrations
 
                     b.HasKey("PostId", "CategoryId");
 
-                    b.HasIndex("CategoryId");
-
-                    b.HasIndex("PostId");
-
-                    b.ToTable("PostCategory");
+                    b.ToTable("PostCategories");
                 });
 
             modelBuilder.Entity("LMS.Entities.PostComment", b =>
@@ -96,11 +91,7 @@ namespace LMS.Migrations
 
                     b.HasKey("PostId", "CommentId");
 
-                    b.HasIndex("CommentId");
-
-                    b.HasIndex("PostId");
-
-                    b.ToTable("PostComment");
+                    b.ToTable("PostComments");
                 });
 
             modelBuilder.Entity("LMS.Entities.PostTag", b =>
@@ -111,11 +102,7 @@ namespace LMS.Migrations
 
                     b.HasKey("PostId", "TagId");
 
-                    b.HasIndex("PostId");
-
-                    b.HasIndex("TagId");
-
-                    b.ToTable("PostTag");
+                    b.ToTable("PostTags");
                 });
 
             modelBuilder.Entity("LMS.Entities.Tag", b =>
@@ -128,45 +115,6 @@ namespace LMS.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Tags");
-                });
-
-            modelBuilder.Entity("LMS.Entities.PostCategory", b =>
-                {
-                    b.HasOne("LMS.Entities.Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("LMS.Entities.Post")
-                        .WithMany()
-                        .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("LMS.Entities.PostComment", b =>
-                {
-                    b.HasOne("LMS.Entities.Comment")
-                        .WithMany()
-                        .HasForeignKey("CommentId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("LMS.Entities.Post")
-                        .WithMany()
-                        .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("LMS.Entities.PostTag", b =>
-                {
-                    b.HasOne("LMS.Entities.Post")
-                        .WithMany()
-                        .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("LMS.Entities.Tag")
-                        .WithMany()
-                        .HasForeignKey("TagId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
         }
     }

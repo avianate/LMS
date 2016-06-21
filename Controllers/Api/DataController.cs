@@ -6,11 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LMS.Controllers.Api
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     public class DataController : Controller
     {
-        private ILMSRepository _repo;
-        
+        private readonly ILMSRepository _repo;
+
         public DataController(ILMSRepository repo)
         {
             _repo = repo;
@@ -21,10 +21,17 @@ namespace LMS.Controllers.Api
         public JsonResult Get()
         {
             var posts = _repo.GetAllPublishedPosts();
+            var json = Json(posts);
+
+            return json;
+        }
+
+        [HttpGet]
+        public JsonResult GetAllPosts()
+        {
+            var posts = _repo.GetAllPosts();
 
             return Json(posts);
-
-            // return new string[] {"value1", "value2" };
         }
 
         // GET api/data/5

@@ -1,11 +1,14 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace LMS.Entities
 {
     public class PostComment
     {
+        [ForeignKey("Post")]
         public int PostId { get; set; }
-        public Post Post { get; set; }
 
+
+        [ForeignKey("Comment")]
         public int CommentId { get; set; }
-        public Comment Comment { get; set; }
     }
 }

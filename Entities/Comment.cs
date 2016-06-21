@@ -16,9 +16,5 @@ namespace LMS.Entities
         public string UserEmail { get; set; }
 
         public string UserName { get; set; }
-
-
-        // Navigation properites
-        public ICollection<PostComment> PostComments { get; set; }
     }
 }

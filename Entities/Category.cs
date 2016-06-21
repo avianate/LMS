@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LMS.Entities
 {
@@ -7,8 +8,5 @@ namespace LMS.Entities
         public int Id { get; set; }
 
         public string CategoryName { get; set; }
-
-        // Navigation properties
-        public ICollection<PostCategory> PostCategories { get; set; }
     }
 }

@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LMS.Entities
 {
     public class Post
     {
         public int Id { get; set; }
-        
+
         public string Title { get; set; }
 
         public string Body { get; set; }
@@ -21,13 +22,15 @@ namespace LMS.Entities
 
         public DateTime ModifiedDate { get; set; }
 
-        
 
-        // Navigation properties
-        public virtual ICollection<PostTag> PostTags { get; set; }
 
-        public virtual ICollection<PostCategory> PostCategories { get; set; }
+        [NotMapped]
+        public List<Tag> Tags { get; set; }
 
-        public virtual ICollection<PostComment> PostComments { get; set; }
+        [NotMapped]
+        public List<Category> Categories { get; set; }
+
+        [NotMapped]
+        public List<Comment> Comments { get; set; }
     }
 }
