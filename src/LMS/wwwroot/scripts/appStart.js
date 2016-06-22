@@ -17,7 +17,7 @@
 
     router.mapRoute({
         route: "/blog",
-        templateUrl: "/app/blog.html",
+        templateUrl: "/app/blog/blog.html",
         controller: function (data) {
             handleResponse(data, "/scripts/blog/blog.js");
             changeNavbar(true);

@@ -226,6 +226,7 @@
 "/Users/nategraham/Documents/Develop/LMS/src/LMS/Program.cs"
 "/Users/nategraham/Documents/Develop/LMS/src/LMS/Startup.cs"
 "/Users/nategraham/Documents/Develop/LMS/src/LMS/Controllers/Api/DataController.cs"
+"/Users/nategraham/Documents/Develop/LMS/src/LMS/Controllers/Web/BlogController.cs"
 "/Users/nategraham/Documents/Develop/LMS/src/LMS/Controllers/Web/HomeController.cs"
 "/Users/nategraham/Documents/Develop/LMS/src/LMS/Data/ILMSRepository.cs"
 "/Users/nategraham/Documents/Develop/LMS/src/LMS/Data/LMSContext.cs"

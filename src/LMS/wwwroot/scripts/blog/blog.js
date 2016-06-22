@@ -1,5 +1,6 @@
-﻿(function (XHR) {
+﻿var BLOG = (function (XHR) {
     var container = document.querySelector(".ajax-container");
+    var postContainer = document.querySelector("#postPreview");
 
     var div = document.createElement("div");
     div.classList.add("row", "center", "middle", "full");
@@ -9,5 +10,13 @@
 
     div.appendChild(p);
     container.appendChild(div);
+
+
+    // publicly exposed methods
+    return {
+        // mapRoute: mapRoute,
+        // route: route,
+        // getRoutes: getRoutes
+    };
 
 }(XHR));
