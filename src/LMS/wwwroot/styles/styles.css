@@ -236,7 +236,7 @@ div.summary .right-content {
 }
 
 .blog .column {
-	height: 500px;
+	height: 100%;
 }
 
 .blog .column .post.row {
@@ -249,8 +249,21 @@ div.summary .right-content {
 
 .blog .column .post.row .left {
 	width: 30%;
+    max-width: 275px;
 }
 
 .blog .column .post.row .right {
 	width: 70%;
+    max-width: 550px;
+}
+
+.blog #posts .post.row {
+    margin: 10px 0;
+    height: 150px;
+    border: 1px solid hsla(0, 0%, 0%, 0.1);
+}
+
+.blog #posts .post.row .preview-image img {
+    max-width: 275px;
+    max-height: 140px;
 }

@@ -135,5 +135,10 @@ namespace LMS.Data
                 post.Comments = new List<Comment>();
             }
         }
+
+        private void Sanitize(string text)
+        {
+            Html.Raw(HtmlUtility.SanitizeHtml(text));
+        }
     }
 }

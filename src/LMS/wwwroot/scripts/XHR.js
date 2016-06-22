@@ -15,13 +15,26 @@
             error: a callback function () {}
         }
     */
+
+    /// <summary>Initiates an ajax request</summary>
+    /// <param name="obj" type="JS Object">A new JS object.</param>
+    /// <param name="requestType></param>
+    /// <param name="url"></param>
+    /// <param name="async"></param>
+    /// <param name="data"></param>
+    /// <param name="responseType"></param>
+    /// <param name="success"></param>
+    /// <param name="error"></param>
+    /// <returns>The rquested data</returns>
     function get(obj) {
         var request = new XMLHttpRequest();
+        var requestType = obj.requestType !== undefined ? obj.requestType : "GET";
         var async = obj.async || true;
 
-        request.open(obj.requestType, obj.url, async);
+        request.open(requestType, obj.url, async);
 
-        if (obj.requestType.toLowerCase() === "post") {
+
+        if (requestType.toLowerCase() === "post") {
             request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
 
             if (obj.data != null) {
@@ -85,10 +98,8 @@
         this.get(obj);
     };
 
-    // exposed functions & variables
+    // publicly exposed functions & variables
     return {
-        // public functions
-
         get: get,
         post: post
     };

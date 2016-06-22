@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Serialization;
 
 namespace LMS
 {
@@ -34,7 +35,11 @@ namespace LMS
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc()
+                        .AddJsonOptions(options =>
+                        {
+                            options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                        });
 
             // var connection = @"Server=(localdb)\mssqllocaldb;Database=LMSdb;Trusted_Connection=True;";
             var connection = @"Data Source=LMSdb.db";

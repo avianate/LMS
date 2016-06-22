@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using LMS.Data;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -30,6 +31,14 @@ namespace LMS.Controllers.Api
         public JsonResult GetAllPosts()
         {
             var posts = _repo.GetAllPosts();
+
+            return Json(posts);
+        }
+
+        [HttpGet]
+        public JsonResult Latest()
+        {
+            var posts = _repo.GetAllPublishedPosts().Take(20);
 
             return Json(posts);
         }
