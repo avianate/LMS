@@ -1,7 +1,9 @@
 ﻿using LMS.Data;
+using LMS.Entities;
 using LMS.Migrations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,6 +37,10 @@ namespace LMS
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddIdentity<User, IdentityRole>()
+                        .AddEntityFrameworkStores<LMSContext>()
+                        .AddDefaultTokenProviders();
+
             services.AddMvc()
                         .AddJsonOptions(options =>
                         {
@@ -61,12 +67,15 @@ namespace LMS
                 app.UseDatabaseErrorPage();
                 app.UseBrowserLink();
             }
+
             else
             {
                 app.UseExceptionHandler("/Home/Error");
             }
 
             app.UseStaticFiles();
+
+            app.UseIdentity();
 
             app.UseMvc(route =>
             {

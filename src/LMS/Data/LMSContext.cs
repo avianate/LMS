@@ -1,9 +1,10 @@
 ﻿using LMS.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace LMS.Data
 {
-    public class LMSContext : DbContext
+    public class LMSContext : IdentityDbContext<User>
     {
         #region Constructor
 
@@ -36,6 +37,8 @@ namespace LMS.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<PostTag>()
                 .HasKey(t => new { t.PostId, t.TagId });
 

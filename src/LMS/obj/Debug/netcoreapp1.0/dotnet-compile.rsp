@@ -242,6 +242,7 @@ C:\Users\grahamn\Source\Repos\LMS\src\LMS\Entities\PostCategory.cs
 C:\Users\grahamn\Source\Repos\LMS\src\LMS\Entities\PostComment.cs
 C:\Users\grahamn\Source\Repos\LMS\src\LMS\Entities\PostTag.cs
 C:\Users\grahamn\Source\Repos\LMS\src\LMS\Entities\Tag.cs
+C:\Users\grahamn\Source\Repos\LMS\src\LMS\Entities\User.cs
 C:\Users\grahamn\Source\Repos\LMS\src\LMS\Migrations\20160621210132_init.cs
 C:\Users\grahamn\Source\Repos\LMS\src\LMS\Migrations\20160621210132_init.Designer.cs
 C:\Users\grahamn\Source\Repos\LMS\src\LMS\Migrations\LMSContextModelSnapshot.cs
