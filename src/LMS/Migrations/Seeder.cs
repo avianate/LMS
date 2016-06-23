@@ -3,20 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using LMS.Data;
 using LMS.Entities;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
 
 namespace LMS.Migrations
 {
     public class Seeder
     {
         private LMSContext _context;
+        private UserManager<User> _userManager;
 
-        public Seeder(LMSContext context)
+        public Seeder(LMSContext context, UserManager<User> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
-        public void EnsureSeedData()
+        public async Task EnsureSeedDataAsync()
         {
+            if (await _userManager.FindByEmailAsync("instructor@aircraftcheckout.com") == null)
+            {
+                var newUser = new User
+                {
+                    UserName = "instructor",
+                    Email = "instructor@aircraftcheckout.com"
+                };
+
+                await _userManager.CreateAsync(newUser, "P@ssword1");
+            }
+
             if (!_context.Posts.Any())
             {
                 var category = new Category
@@ -92,7 +107,8 @@ namespace LMS.Migrations
                         IsPublished = true,
                         Categories = new List<Category> { category },
                         Tags = new List<Tag> { tag, tag2 },
-                        Comments = new List<Comment> { comment }
+                        Comments = new List<Comment> { comment },
+                        Author = "instructor"
                     },
 
                     new Post
@@ -107,7 +123,8 @@ namespace LMS.Migrations
                         IsPublished = true,
                         Categories = new List<Category> { category },
                         Tags = new List<Tag> { tag },
-                        Comments = new List<Comment> { comment }
+                        Comments = new List<Comment> { comment },
+                        Author = "instructor"
                     },
 
                     new Post
@@ -120,7 +137,8 @@ namespace LMS.Migrations
                         PublishDate = DateTime.UtcNow.AddMinutes(-5),
                         ModifiedDate = DateTime.UtcNow.AddMinutes(-5),
                         IsPublished = true,
-                        Tags = new List<Tag> { tag2 }
+                        Tags = new List<Tag> { tag2 },
+                        Author = "instructor"
                     },
 
                     new Post
@@ -131,7 +149,8 @@ namespace LMS.Migrations
                         ImageUrl = "",
                         Slug = "fourth-post",
                         IsPublished = false,
-                        ModifiedDate = DateTime.UtcNow.AddMinutes(-3)
+                        ModifiedDate = DateTime.UtcNow.AddMinutes(-3),
+                        Author = "instructor"
                     },
 
                     new Post
@@ -143,7 +162,8 @@ namespace LMS.Migrations
                         IsPublished = false,
                         ModifiedDate = DateTime.UtcNow,
                         Categories = new List<Category> { category },
-                        Tags = new List<Tag> { tag }
+                        Tags = new List<Tag> { tag },
+                        Author = "instructor"
                     }
                 };
 

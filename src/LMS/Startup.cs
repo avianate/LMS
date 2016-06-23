@@ -56,7 +56,7 @@ namespace LMS
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, Seeder seeder)
+        public async void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, Seeder seeder)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -85,7 +85,7 @@ namespace LMS
                     new { Controller = "Home", Action = "Index" });
             });
 
-            seeder.EnsureSeedData();
+            await seeder.EnsureSeedDataAsync();
         }
     }
 }

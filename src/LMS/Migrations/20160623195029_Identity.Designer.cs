@@ -8,9 +8,10 @@ using LMS.Data;
 namespace LMS.Migrations
 {
     [DbContext(typeof(LMSContext))]
-    partial class LMSContextModelSnapshot : ModelSnapshot
+    [Migration("20160623195029_Identity")]
+    partial class Identity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rc2-20901");
@@ -51,8 +52,6 @@ namespace LMS.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Author");
 
                     b.Property<string>("Body");
 

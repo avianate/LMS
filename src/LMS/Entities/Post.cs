@@ -22,6 +22,8 @@ namespace LMS.Entities
 
         public DateTime ModifiedDate { get; set; }
 
+        public string Author { get; set; }
+
 
 
         [NotMapped]
