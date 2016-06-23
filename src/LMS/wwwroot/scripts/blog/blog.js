@@ -31,7 +31,7 @@
 
             console.log(post);
         }
-    }
+    };
 
     // publicly exposed methods
     return {

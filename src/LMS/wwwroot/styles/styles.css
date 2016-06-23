@@ -4,6 +4,7 @@
 
 @import "./reset.css";
 @import "./flex.css";
+@import "./animations.css";
 
 /*
     GRADIENTS:
@@ -24,6 +25,10 @@ body {
 	font-size: 12pt;
 	font-weight: normal;
 	color: hsla(0, 0%, 0%, .8);
+}
+
+body.fade-in {
+    animation: fadeIn 1s forwards;
 }
 
 h1,
@@ -64,6 +69,14 @@ p {
 	font-size: 1rem;
 	line-height: 1.4rem;
 	color: hsla(0, 0%, 0%, .5);
+}
+
+.fade-in {
+    animation: fadeIn 0.3s forwards;
+}
+
+.fade-out {
+    animation: fadeOut 0.3s forwards;
 }
 
 button.primary {
@@ -116,11 +129,7 @@ button.hollow {
 }
 
 .nav-bar.dark a {
-	color: hsla(0, 0%, 0%, 0.7);
-
-	-webkit-transition: color 0.2s ease-in-out;
-	-moz-transition: color 0.2s ease-in-out;
-	transition: color 0.2s ease-in-out;
+    color: hsla(0, 0%, 0%, 0.7);
 }
 
 .nav-bar.dark a:hover {
@@ -130,18 +139,6 @@ button.hollow {
 .nav-bar.center-container {
 	margin: 0 auto;
 	padding: 20px;
-}
-
-.ajax-container {
-	-webkit-transition: all 0.5s ease-in-out;
-	-moz-transition: all 0.5s ease-in-out;
-	transition: all 0.5s ease-in-out;
-
-	opacity: 1;
-}
-
-.ajax-container.fade-out {
-	opacity: 0;
 }
 
 .hero {
@@ -266,4 +263,8 @@ div.summary .right-content {
 .blog #posts .post.row .preview-image img {
     max-width: 275px;
     max-height: 140px;
+}
+
+.blog .post.fade-in {
+    animation: fadeIn 1s forwards;
 }

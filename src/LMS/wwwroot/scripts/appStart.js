@@ -2,7 +2,6 @@
     "use strict";
 
     var container = getAjaxContainer();
-    container.addEventListener("transitionend", fadeIn);
 
     // ROUTES
     router.mapRoute({
@@ -62,18 +61,24 @@
 
     // FUNCTIONS
 
-    // Handles display of the ajax data 
     function handleResponse(data, scriptUrl) {
         if (container.classList.contains("fade-out")) {
-            container.addEventListener("load", function loadData() {
-                container.innerHTML = data;
-                setScripts(scriptUrl);
-                container.removeEventListener("load", loadData);
+            container.addEventListener("animationend", function loadData(e) {
+                if (e.animationName === "fadeOut") {
+                    setData(data);
+                    setScripts(scriptUrl);
+                    fadeIn();
+                    container.removeEventListener("animationend", loadData);
+                }
             });
         } else {
-            container.innerHTML = data;
+            setData(data);
             setScripts(scriptUrl);
         }
+    };
+
+    function setData(data) {
+        container.innerHTML = data;
     };
 
     // Dynamic script loading
@@ -97,10 +102,8 @@
     // Fade in ajax data
     function fadeIn() {
         if (container.classList.contains("fade-out")) {
-            var event = new CustomEvent("load");
-            container.dispatchEvent(event);
-
             container.classList.remove("fade-out");
+            container.classList.add("fade-in");
         }
     };
 
@@ -119,6 +122,6 @@
     // Get the ajax container
     function getAjaxContainer() {
         return document.querySelector(".ajax-container");
-    }
+    };
 
 })(router, XHR);

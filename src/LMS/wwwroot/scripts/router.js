@@ -30,6 +30,11 @@
 
                 // start fading out the ajax container before each request is sent
                 var container = getContainer();
+
+                if (container.classList.contains("fade-in")) {
+                    container.classList.remove("fade-in");
+                }
+
                 container.classList.add("fade-out");
 
                 pushHistory(e.currentTarget);
