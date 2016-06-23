@@ -1,0 +1,33 @@
+﻿@model LMS.ViewModels.LoginViewModel
+
+@{ 
+    ViewBag.Title = "Login";
+}
+
+<div class="row center middle full">
+    <div class="span-6 offset-3">
+        <h3>Login</h3>
+        @*<div asp-validation-summary="ValidationSummary.ModelOnly"></div>*@
+        <form method="post" novalidate>
+            <div class="form-group">
+                <label asp-for="UserName"></label>
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password"></label>
+                <input asp-for="Password" class="form-control" type="password" />
+                <span asp-validation-for="Password"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Login" class="button primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+
+}

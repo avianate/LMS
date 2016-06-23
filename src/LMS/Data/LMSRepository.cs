@@ -100,6 +100,16 @@ namespace LMS.Data
             return tagsForPost;
         }
 
+        public IEnumerable<Post> GetUserPosts(string name)
+        {
+            var posts = _context.Posts
+                                    .Where(n => n.Author == name)
+                                    .OrderBy(d => d.PublishDate)
+                                    .ToList();
+
+            return posts;
+        }
+
         private void SetAllPostEntities(List<Post> posts)
         {
             foreach (var post in posts)

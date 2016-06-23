@@ -2,6 +2,8 @@
 using LMS.Data;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
+using System.Net;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -39,6 +41,15 @@ namespace LMS.Controllers.Api
         public JsonResult Latest()
         {
             var posts = _repo.GetAllPublishedPosts().Take(20);
+
+            return Json(posts);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public JsonResult TestAuth()
+        {
+            var posts = _repo.GetUserPosts(User.Identity.Name);
 
             return Json(posts);
         }

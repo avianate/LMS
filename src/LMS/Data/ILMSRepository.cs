@@ -9,6 +9,8 @@ namespace LMS.Data
 
         IEnumerable<Post> GetAllPublishedPosts();
 
+        IEnumerable<Post> GetUserPosts(string name);
+
         IEnumerable<Comment> GetAllCommentsForPost(int postId);
 
         IEnumerable<Category> GetAllCategories();

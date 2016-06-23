@@ -1,14 +1,18 @@
 ﻿using LMS.Data;
 using LMS.Entities;
 using LMS.Migrations;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Serialization;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace LMS
 {
@@ -37,11 +41,43 @@ namespace LMS
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddIdentity<User, IdentityRole>()
+            services.AddIdentity<User, IdentityRole>(config =>
+            {
+                config.User.RequireUniqueEmail = true;
+                config.Password.RequiredLength = 8;
+                config.Password.RequireLowercase = true;
+                config.Password.RequireUppercase = true;
+                config.Password.RequireNonAlphanumeric = true;
+                config.Password.RequireDigit = true;
+                config.Cookies.ApplicationCookie.LoginPath = "/Account/Login";
+                config.Cookies.ApplicationCookie.Events = new CookieAuthenticationEvents()
+                {
+                    OnRedirectToLogin = ctx =>
+                    {
+                        if (ctx.Request.Path.StartsWithSegments("/api") &&
+                            ctx.Response.StatusCode == (int)HttpStatusCode.OK)
+                        {
+                            ctx.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                        }
+
+                        else
+                        {
+                            ctx.Response.Redirect(ctx.RedirectUri);
+                        }
+
+                        return Task.FromResult(0);
+                    }
+                };
+            })
                         .AddEntityFrameworkStores<LMSContext>()
                         .AddDefaultTokenProviders();
 
-            services.AddMvc()
+            services.AddMvc(config =>
+            {
+#if !DEBUG
+                config.Filters.Add(new RequireHttpsAttribute());
+#endif
+            })
                         .AddJsonOptions(options =>
                         {
                             options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
