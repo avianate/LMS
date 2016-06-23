@@ -2,3 +2,5 @@
 *.pdb
 bin/
 src/LMS/bin/
+.suo
+applicationhost.config
