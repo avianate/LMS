@@ -20,14 +20,32 @@
             
             @if (User.Identity.IsAuthenticated) 
             {
-                <li><a href="/profile">@User.Identity.Name</a></li>
-                <li><a href="/signout">Sign Out</a></li>
+                <li><a id="signInUser" href="/profile">@User.Identity.Name</a></li>
+                <li><a id="signUpOut" href="/signout">Sign Out</a></li>
             } 
             
             else
             {
-                <li><a href="/signin">Sign In</a></li>
-                <li><a href="/signup">Sign Up</a></li>
+                <li>
+                    <span id="signInUser">Sign In</span>
+                    <div class="signinForm hidden">
+                        <h3>Sign In</h3>
+                        <div class="form-group">
+                            <label for="UserName"></label>
+                            <input id="userName" type="text" class="form-control" required />
+                            <span class="validation" data-validation-for="userName"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="Password"></label>
+                            <input id="password" class="form-control" type="password" required />
+                            <span class="validation" data-validation-for="Password"></span>
+                        </div>
+                        <div class="form-group">
+                            <input id="submit" type="submit" class="button primary" value="Sign In">
+                        </div>
+                    </div>    
+                </li>
+                <li><a id="signUpOut" href="/signup">Sign Up</a></li>
             }
         </ul>
     </div>

@@ -2,9 +2,6 @@
 using LMS.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace LMS.Controllers
@@ -13,10 +10,12 @@ namespace LMS.Controllers
     public class AccountController : Controller
     {
         private SignInManager<User> _signInManager;
+        private UserManager<User> _userManager;
 
-        public AccountController(SignInManager<User> signInManager)
+        public AccountController(SignInManager<User> signInManager, UserManager<User> userManager)
         {
             _signInManager = signInManager;
+            _userManager = userManager;
         }
 
 
@@ -24,14 +23,14 @@ namespace LMS.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Index", "Home");
+                return PartialView("~/Views/Home/Index.cshtml");
             }
 
-            return View();
+            return PartialView("SignIn");
         }
 
         [HttpPost]
-        public async Task<IActionResult> SignIn(LoginViewModel vm, string returnUrl)
+        public async Task<JsonResult> SignIn([FromBody]LoginViewModel vm, string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -41,12 +40,12 @@ namespace LMS.Controllers
                 {
                     if (string.IsNullOrWhiteSpace(returnUrl))
                     {
-                        return RedirectToAction("Index", "Home");
+                        return Json(vm.UserName);
                     }
 
                     else
                     {
-                        return Redirect(returnUrl);
+                        return Json(false);
                     }
                 }
 
@@ -56,7 +55,7 @@ namespace LMS.Controllers
                 }
             }
 
-            return View();
+            return Json(false);
         }
 
         public async Task<IActionResult> SignOut()
@@ -66,7 +65,7 @@ namespace LMS.Controllers
                 await _signInManager.SignOutAsync();
             }
 
-            return RedirectToAction("Index", "Home");
+            return PartialView("~/Views/Home/Index.cshtml");
         }
     }
 }

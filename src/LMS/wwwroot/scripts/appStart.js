@@ -1,7 +1,12 @@
 ﻿(function (router, XHR) {
     "use strict";
 
+    window.addEventListener("DOMContentLoaded", init);
+
+    var isAnimating = false;
     var container = getAjaxContainer();
+    container.addEventListener("animationstart", toggleAnimating);
+    container.addEventListener("animationend", toggleAnimating);
 
     // ROUTES
     router.mapRoute({
@@ -43,19 +48,20 @@
 
     router.mapRoute({
         route: "/signin",
-        templateUrl: "/app/account/signin.html",
+        templateUrl: "no-route",
         controller: function (data) {
-            handleResponse(data);
-            changeNavbar(true);
+            // handleResponse(data, "/scripts/account/signin.js");
+            // changeNavbar(true);
         }
     });
 
     router.mapRoute({
         route: "/signout",
-        templateUrl: "/app/account/signout.html",
+        templateUrl: "account/signout",
         controller: function (data) {
-            handleResponse(data);
-            changeNavbar(true);
+            location = "/";
+            // handleResponse(data);
+            // changeNavbar(true);
         }
     });
 
@@ -63,14 +69,20 @@
 
     function handleResponse(data, scriptUrl) {
         if (container.classList.contains("fade-out")) {
-            container.addEventListener("animationend", function loadData(e) {
-                if (e.animationName === "fadeOut") {
-                    setData(data);
-                    setScripts(scriptUrl);
-                    fadeIn();
-                    container.removeEventListener("animationend", loadData);
-                }
-            });
+            if (isAnimating) {
+                container.addEventListener("animationend", function loadData(e) {
+                    if (e.animationName === "fadeOut") {
+                        setData(data);
+                        setScripts(scriptUrl);
+                        fadeIn();
+                        container.removeEventListener("animationend", loadData);
+                    }
+                });
+            } else {
+                setData(data);
+                setScripts(scriptUrl);
+                fadeIn();
+            }
         } else {
             setData(data);
             setScripts(scriptUrl);
@@ -122,6 +134,27 @@
     // Get the ajax container
     function getAjaxContainer() {
         return document.querySelector(".ajax-container");
+    };
+
+    function toggleAnimating(e) {
+        if (e.type === "animationstart") {
+            isAnimating = true;
+        } else {
+            isAnimating = false;
+        }
+    };
+
+    function init() {
+        var signinButton = document.querySelector("#signInUser");
+        signinButton.addEventListener("click", showSignInForm);
+    };
+
+    function showSignInForm(e) {
+        if (e.target.textContent === "Sign In") {
+            var signInForm = document.querySelector(".signinForm");
+            signInForm.classList.remove("hidden")
+            signInForm.classList.add("fade-in");
+        }
     };
 
 })(router, XHR);
