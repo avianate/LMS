@@ -1,10 +1,12 @@
-﻿@{
+﻿@using System.Security.Claims
+
+@{
     ViewBag.Title = "Welcome! | Aircraft Checkout";
 }
 
 <!-- Nav Section -->
 <div class="nav-bar center-container row center middle full fade-in">
-    <div class="left-content row right middle half">
+    <div class="nav left-content row right middle half">
         <ul class="nav-left row nowrap between half">
             <li><a href="/">Home</a></li>
             <li><a href="/features">Features</a></li>
@@ -13,10 +15,20 @@
         </ul>
     </div>
     <div class="center-content row center middle quarter"></div>
-    <div class="right-content row left middle quarter">
+    <div class="nav right-content row left middle quarter">
         <ul class="nav-right row nowrap between half">
-            <li><a href="/signin">Sign In</a></li>
-            <li><a href="/signout">Sign Up</a></li>
+            
+            @if (User.Identity.IsAuthenticated) 
+            {
+                <li><a href="/profile">@User.Identity.Name</a></li>
+                <li><a href="/signout">Sign Out</a></li>
+            } 
+            
+            else
+            {
+                <li><a href="/signin">Sign In</a></li>
+                <li><a href="/signup">Sign Up</a></li>
+            }
         </ul>
     </div>
 </div>
