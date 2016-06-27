@@ -1,8 +1,6 @@
 ﻿(function (router, XHR) {
     "use strict";
 
-    window.addEventListener("DOMContentLoaded", init);
-
     var isAnimating = false;
     var container = getAjaxContainer();
     container.addEventListener("animationstart", toggleAnimating);
@@ -48,22 +46,27 @@
 
     router.mapRoute({
         route: "/signin",
-        templateUrl: "no-route",
-        controller: function (data) {
-            // handleResponse(data, "/scripts/account/signin.js");
-            // changeNavbar(true);
-        }
+        templateUrl: "no-route"
     });
 
     router.mapRoute({
         route: "/signout",
         templateUrl: "account/signout",
         controller: function (data) {
+            // redirect to home
             location = "/";
-            // handleResponse(data);
-            // changeNavbar(true);
         }
     });
+
+    router.mapRoute({
+        route: "/profile",
+        templateUrl: "account/profile",
+        controller: function (data) {
+            //handleResponse(data, "/scripts/accounts/profile");
+            handleResponse(data);
+            changeNavbar(false);
+        }
+    })
 
     // FUNCTIONS
 
@@ -98,7 +101,9 @@
         var script = document.querySelector("#dynamic");
 
         if (script !== undefined && script !== null) {
-            document.body.removeChild(script);
+            if (document.body.contains(script)) {
+                document.body.removeChild(script);
+            }
         }
 
         if (scriptUrl !== "" && scriptUrl !== undefined && scriptUrl !== null) {
@@ -141,19 +146,6 @@
             isAnimating = true;
         } else {
             isAnimating = false;
-        }
-    };
-
-    function init() {
-        var signinButton = document.querySelector("#signInUser");
-        signinButton.addEventListener("click", showSignInForm);
-    };
-
-    function showSignInForm(e) {
-        if (e.target.textContent === "Sign In") {
-            var signInForm = document.querySelector(".signinForm");
-            signInForm.classList.remove("hidden")
-            signInForm.classList.add("fade-in");
         }
     };
 

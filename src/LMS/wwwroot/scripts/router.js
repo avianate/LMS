@@ -28,6 +28,10 @@
                 e.preventDefault();
                 e.stopPropagation();
 
+                if (e.target.hasAttribute("data-no-route")) {
+                    return;
+                }
+
                 // start fading out the ajax container before each request is sent
                 var container = getContainer();
 

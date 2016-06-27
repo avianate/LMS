@@ -1,11 +1,15 @@
 ﻿using LMS.Entities;
 using LMS.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace LMS.Controllers
 {
+    [Authorize]
     [Route("[controller]/[action]")]
     public class AccountController : Controller
     {
@@ -18,7 +22,7 @@ namespace LMS.Controllers
             _userManager = userManager;
         }
 
-
+        [AllowAnonymous]
         public IActionResult SignIn()
         {
             if (User.Identity.IsAuthenticated)
@@ -29,6 +33,7 @@ namespace LMS.Controllers
             return PartialView("SignIn");
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<JsonResult> SignIn([FromBody]LoginViewModel vm, string returnUrl)
         {
@@ -40,12 +45,12 @@ namespace LMS.Controllers
                 {
                     if (string.IsNullOrWhiteSpace(returnUrl))
                     {
-                        return Json(vm.UserName);
+                        return Json(new { userName = vm.UserName });
                     }
 
                     else
                     {
-                        return Json(false);
+                        return Json(new { url = returnUrl, userName = vm.UserName });
                     }
                 }
 
@@ -55,9 +60,13 @@ namespace LMS.Controllers
                 }
             }
 
-            return Json(false);
+            var result = (int)HttpStatusCode.Unauthorized;
+            Response.StatusCode = result;
+
+            return Json(result);
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> SignOut()
         {
             if (User.Identity.IsAuthenticated)
@@ -66,6 +75,34 @@ namespace LMS.Controllers
             }
 
             return PartialView("~/Views/Home/Index.cshtml");
+        }
+
+
+        public IActionResult Profile()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = GetCurrentUserASync().Result;
+
+
+                var profile = new UserProfileViewModel
+                {
+                    UserName = user.UserName,
+                    Email = user.Email
+                };
+
+                return Json(profile);
+            }
+
+            var result = (int)HttpStatusCode.Unauthorized;
+            Response.StatusCode = result;
+
+            return Json(result);
+        }
+
+        private Task<User> GetCurrentUserASync()
+        {
+            return _userManager.GetUserAsync(HttpContext.User);
         }
     }
 }
