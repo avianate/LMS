@@ -18,14 +18,14 @@
         controller: "/scripts/courses/courses.js"
     });
 
-    router.mapRoute({
-        route: "/signup",
-        templateUrl: "/app/account/register.html",
-        controller: function (data) {
-            handleResponse(data);
-            changeNavbar(true);
-        }
-    });
+    //router.mapRoute({
+    //    route: "/signup",
+    //    templateUrl: "/app/account/register.html",
+    //    controller: function (data) {
+    //        handleResponse(data);
+    //        useDarkNavbar(true);
+    //    }
+    //});
 
     router.mapRoute({
         route: "/signin",
@@ -35,21 +35,17 @@
     router.mapRoute({
         route: "/signout",
         controller: "/scripts/account/signout.js"
-        //templateUrl: "account/signout",
-        //controller: function (data) {
-        //    // redirect to home
-        //    location = "/";
-        //}
     });
 
     router.mapRoute({
         route: "/profile",
-        templateUrl: "account/profile",
-        controller: function (data) {
-            //handleResponse(data, "/scripts/accounts/profile");
-            handleResponse(data);
-            changeNavbar(false);
-        }
+        controller: "/scripts/account/profile.js"
+        //templateUrl: "account/profile",
+        //controller: function (data) {
+        //    //handleResponse(data, "/scripts/accounts/profile");
+        //    handleResponse(data);
+        //    useDarkNavbar(false);
+        //}
     });
 
 })(router);

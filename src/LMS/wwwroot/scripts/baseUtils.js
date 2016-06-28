@@ -64,6 +64,8 @@
         } else {
             setData(container, data);
         }
+
+        return;
     };
 
     // check if an element has the specified css class
@@ -129,7 +131,7 @@
         hasClass: hasClass,
         fadeIn: fadeIn,
         fadeOut: fadeOut,
-        changeNavbar: changeNavbar,
+        useDarkNavbar: changeNavbar,
         getContainer: getContainer,
         getTemplate: getTemplate
     };

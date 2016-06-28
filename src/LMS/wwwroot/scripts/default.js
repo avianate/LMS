@@ -12,7 +12,7 @@
 
     function loadContent(data) {
         baseUtils.successHandler(container, data);
-        baseUtils.changeNavbar(false);
+        baseUtils.useDarkNavbar(false);
     };
 
 })(XHR, baseUtils);

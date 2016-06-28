@@ -8,7 +8,6 @@
     var postData;
 
     document.addEventListener("DOMContentLoaded", getTemplate());
-    //getTemplate();
 
     // load the html template
     function getTemplate() {
@@ -17,7 +16,7 @@
 
     function loadContent(data) {
         baseUtils.successHandler(container, data);
-        baseUtils.changeNavbar(true);
+        baseUtils.useDarkNavbar(true);
 
         postContainer = baseUtils.getContainer("#posts");
         loadPosts();
