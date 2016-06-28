@@ -1,4 +1,4 @@
-﻿var router = (function (XHR, baseUtils) {
+﻿var router = (function (XHR) {
     "use strict";
 
     // the client side routes
@@ -11,7 +11,6 @@
     // listen for back / forward browser buttons
     window.addEventListener("popstate", route);
     window.addEventListener("DOMContentLoaded", route);
-
     initLinks();
 
     // hijack click events on all anchor tags to prevent browser from loading their URLs
@@ -29,20 +28,18 @@
                 e.preventDefault();
                 e.stopPropagation();
 
-                // if there is a data-no-route attribute on the anchor tag,
-                // it's controller will handle the events
                 if (e.target.hasAttribute("data-no-route")) {
                     return;
                 }
 
                 // start fading out the ajax container before each request is sent
-                //var container = getContainer();
+                var container = getContainer();
 
-                //if (container.classList.contains("fade-in")) {
-                //    container.classList.remove("fade-in");
-                //}
+                if (container.classList.contains("fade-in")) {
+                    container.classList.remove("fade-in");
+                }
 
-                //container.classList.add("fade-out");
+                container.classList.add("fade-out");
 
                 pushHistory(e.currentTarget);
             });
@@ -63,7 +60,7 @@
     function replaceHistory(title) {
         history.replaceState(title, title, title);
         document.title = title;
-    };
+    }
 
     /*
         obj.route                // the brower route we want to map to our client side router
@@ -77,9 +74,9 @@
         var thisObject = obj.route.toLowerCase();
 
         routes[thisObject] = {
-            //templateUrl: obj.templateUrl || obj.route.toLowerCase(),
+            templateUrl: obj.templateUrl || obj.route.toLowerCase(),
             controller: obj.controller,
-            //container: obj.container || defaultContainer
+            container: obj.container || defaultContainer
         };
 
         if (obj.default) {
@@ -99,8 +96,8 @@
 
         // add fade in / out effect if it was a browser back / forward navigation
         if (e !== undefined && e.type === "popstate") {
-            var container = getContainer(defaultContainer);
-            baseUtils.fadeOut(container);
+            var container = getContainer();
+            container.classList.add("fade-out");
         }
 
         url = location.pathname.toLowerCase() || "/";
@@ -111,43 +108,43 @@
             currentRoute = defaultRoute;
         }
 
-        controller = currentRoute.controller;        
+        controller = currentRoute.controller || setContent;
 
-        addControllerToDOM(controller);
-        //// get the data from the templateUrl
-        //XHR.get({
-        //    requestType: "GET",
-        //    url: currentRoute.controller,
-        //    success: addControllerToDOM
-        //});
+        // if we have a route object and it's container element
+        if (currentRoute.templateUrl !== null && currentRoute.templateUrl !== "") {
 
-        replaceHistory(url.replace("/", ""));
+            // get the data from the templateUrl
+            XHR.get({
+                requestType: "GET",
+                url: currentRoute.templateUrl,
+                success: controller
+            });
+
+            replaceHistory(url.replace("/", ""));
+        }
     };
 
-    // Dynamic script loading
-    function addControllerToDOM(scriptUrl) {
-        var script = document.querySelector("#dynamic");
+    // used if there is no "controller" listed on the route object
+    function setContent(data) {
+        var container = getContainer(currentRoute.container);
 
-        if (script !== undefined && script !== null) {
-            if (document.body.contains(script)) {
-                document.body.removeChild(script);
-            }
-        }
-
-        if (scriptUrl !== "" && scriptUrl !== undefined && scriptUrl !== null) {
-            var newScript = document.createElement("script");
-
-            newScript.id = "dynamic";
-            newScript.src = scriptUrl;
-
-            document.body.appendChild(newScript);
+        if (container) {
+            container.innerHTML = data;
+        } else {
+            console.log("No container to place content into")
         }
     };
 
     // returns the object for the passed in selector
     // will grab the defaultContainer if no selector is passed in
     function getContainer(selector) {
-        return baseUtils.getContainer(selector);
+        var container = selector !== ""
+                        && selector !== undefined
+                        && selector !== null
+                            ? document.querySelector(selector)
+                            : document.querySelector(defaultContainer);
+
+        return container;
     };
 
     // gets the routes
@@ -162,4 +159,4 @@
         getRoutes: getRoutes
     };
 
-})(XHR, baseUtils);
+})(XHR);

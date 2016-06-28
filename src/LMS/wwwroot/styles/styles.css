@@ -76,14 +76,6 @@ p {
 	display: none;
 }
 
-.fade-in {
-    animation: fadeIn 0.3s forwards;
-}
-
-.fade-out {
-    animation: fadeOut 0.3s forwards;
-}
-
 .signInForm.fade-in {
     animation: fadeInDown 0.3s forwards;
 }
@@ -112,6 +104,18 @@ button.hollow,
 	padding: 10px;
 	margin-left: 10px;
 	font-size: .9rem;
+}
+
+.button.raised,
+button.raised {
+    box-shadow: 2px 2px 4px 1px hsla(0, 0%, 0%, 0.7);
+}
+
+.button.raised.active,
+.button.raised:active,
+button.raised:active {
+    box-shadow: 1px 1px 2px 0 hsla(0, 0%, 0%, 0.5);
+    transform: translate3d(1px, 1px, 0);
 }
 
 .container {
@@ -175,8 +179,7 @@ button.hollow,
 	background: hsla(337, 80%, 55%, 0.8);
 	padding: 50px;
 	border-radius: 8px;
-	-webkit-filter: drop-shadow(10px 15px 10px hsla(0, 0%, 0%, 1));
-	filter: drop-shadow(10px 15px 10px hsla(0, 0%, 0%, 1));
+	box-shadow: 10px 15px 10px hsla(0, 0%, 0%, 1);
 }
 
 .hero {

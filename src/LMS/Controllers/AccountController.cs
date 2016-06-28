@@ -56,14 +56,15 @@ namespace LMS.Controllers
 
                 else
                 {
-                    ModelState.AddModelError("", "Incorrect UserName or Password");
+                    var errorMessage = "Incorrect UserName or Password";
+                    ModelState.AddModelError("Error", errorMessage);
                 }
             }
 
             var result = (int)HttpStatusCode.Unauthorized;
             Response.StatusCode = result;
 
-            return Json(result);
+            return Json(ModelState["Error"].Errors);
         }
 
         [AllowAnonymous]
@@ -74,7 +75,9 @@ namespace LMS.Controllers
                 await _signInManager.SignOutAsync();
             }
 
-            return PartialView("~/Views/Home/Index.cshtml");
+            Response.StatusCode = (int)HttpStatusCode.OK;
+
+            return Json(true);
         }
 
 

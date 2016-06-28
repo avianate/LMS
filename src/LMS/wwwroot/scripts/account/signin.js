@@ -1,4 +1,4 @@
-(function (XHR) {
+(function (XHR, $) {
     "use strict";
 
     window.addEventListener("DOMContentLoaded", init);
@@ -10,49 +10,76 @@
     var password = {};
 
     function init() {
-        signInForm = document.querySelector(".signInForm");
+        signInForm = $.getContainer(".signInForm");
 
-        signInButton = document.querySelector("#signInUser");
+        signInButton = $.getContainer("#signInUser");
         signInButton.addEventListener("click", showForm);
 
-        submitButton = document.querySelector("#submit");
-        submitButton.addEventListener("click", signIn);
+        submitButton = $.getContainer("#submit");
 
-        userName = document.querySelector("#userName");
-        password = document.querySelector("#password");
+        if (submitButton !== null) {
+            submitButton.addEventListener("click", signIn);
+        }
 
-        document.addEventListener("keyup", canSubmitForm);
+        userName = $.getContainer("#userName");
+        password = $.getContainer("#password");
+
+        document.addEventListener("keydown", canSubmitForm);
         window.addEventListener("click", hideForm);
     };
 
     function signIn(e) {
         e.preventDefault();
 
-        if (isValid) {
+        if (isValid()) {
 
             XHR.post({
                 url: "/account/signin",
-                data: JSON.stringify({userName: userName.value, password: password.value}),
-                success: function (data) {
-                    var signInButton = document.querySelector("#signInUser");
-                    signInButton.textContent = JSON.parse(data).userName;
-                    signInButton.setAttribute("href", "/profile");
+                data: JSON.stringify({ userName: userName.value, password: password.value }),
+                success: successHandler,
+                error: errorHandler
+            });
+        }
+    };
 
-                    if (signInButton.hasAttribute("data-no-route")) {
-                        signInButton.removeAttribute("data-no-route");
-                    }
+    function successHandler(data) {
+        var signInButton = $.getContainer("#signInUser");
+        signInButton.textContent = JSON.parse(data).userName;
+        signInButton.setAttribute("href", "/profile");
 
-                    var signUpButton = document.querySelector("#signUpOut");
-                    signUpButton.textContent = "Sign Out";
-                    signUpButton.setAttribute("href", "/signout");
+        if (signInButton.hasAttribute("data-no-route")) {
+            signInButton.removeAttribute("data-no-route");
+        }
 
+        var signUpButton = $.getContainer("#signUpOut");
+        signUpButton.textContent = "Sign Out";
+        signUpButton.setAttribute("href", "/signout");
+
+        $.fadeOut(signInForm);
+
+        signInForm.addEventListener("animationend", function () {
+            signInForm.classList.add("hidden");
+            signInForm.classList.remove("fade-out");
+        });
+    };
+
+    function errorHandler(data) {
+        signInForm.classList.add("shake");
+        signInForm.addEventListener("animationend", function shake(e) {
+            signInForm.classList.remove("shake");
+            signInForm.removeEventListener("animationend", shake);
+        });
+    };
+
+    function showForm(e) {
+        if (e.target.textContent === "Sign In") {
+            signInForm.classList.remove("hidden")
+            $.fadeIn(signInForm);
+            signInForm.addEventListener("animationend", function animationDone(e) {
+                if (e.animationName === "fade-in" || e.animationName === "fadeInDown") {
                     signInForm.classList.remove("fade-in");
-                    signInForm.classList.add("fade-out");
-
-                    signInForm.addEventListener("animationend", function () {
-                        signInForm.classList.add("hidden");
-                        signInForm.classList.remove("fade-out");
-                    });
+                    signInForm.removeEventListener("animationend", animationDone);
+                    userName.focus();
                 }
             });
         }
@@ -60,11 +87,11 @@
 
     function hideForm(e) {
         var target = e.target,
-            formIsVisible = !signInForm.classList.contains("hidden");
+            formIsVisible = !$.hasClass(signInForm, "hidden");
 
         if (formIsVisible && target !== signInButton && target !== signInForm && !signInForm.contains(target)) {
-            signInForm.classList.remove("fade-in");
-            signInForm.classList.add("fade-out");
+            $.fadeOut(signInForm);
+
             signInForm.addEventListener("animationend", function hide() {
                 signInForm.classList.add("hidden");
                 signInForm.removeEventListener("animationend", hide);
@@ -78,24 +105,26 @@
             return true;
         }
 
+        errorHandler();
         return false;
     };
 
     function canSubmitForm(e) {
         if (e.key.toLowerCase() === "enter") {
 
+            // fake button press
+            submitButton.classList.toggle("active");
+
+            // fake button release
+            setTimeout(function() {
+                submitButton.classList.toggle("active");
+            }, 120);
+
+            // submit
             if (isValid()) {
                 submitButton.click();
             }
         }
     };
 
-    function showForm(e) {
-        if (e.target.textContent === "Sign In") {
-            signInForm.classList.remove("hidden")
-            signInForm.classList.remove("fade-out");
-            signInForm.classList.add("fade-in");
-        }
-    };
-
-})(XHR);
+})(XHR, baseUtils);

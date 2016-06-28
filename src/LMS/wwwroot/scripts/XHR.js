@@ -15,17 +15,6 @@
             error: a callback function () {}
         }
     */
-
-    /// <summary>Initiates an ajax request</summary>
-    /// <param name="obj" type="JS Object">A new JS object.</param>
-    /// <param name="requestType></param>
-    /// <param name="url"></param>
-    /// <param name="async"></param>
-    /// <param name="data"></param>
-    /// <param name="responseType"></param>
-    /// <param name="success"></param>
-    /// <param name="error"></param>
-    /// <returns>The rquested data</returns>
     function get(obj) {
         var request = new XMLHttpRequest();
         var requestType = obj.requestType !== undefined ? obj.requestType : "GET";
@@ -41,7 +30,7 @@
                 if (obj.responseType != null && obj.responseType.toLowerCase() === "json") {
                     response = JSON.parse(response);
                 }
-                
+
                 // return success handler or data
                 if (obj.success != null && obj.success != "") {
                     return obj.success(response);
@@ -52,17 +41,29 @@
             } else {
                 // reached the server but it returned an error
                 if (obj.error) {
-                    return error;
-                }
+                    var response = JSON.parse(request.responseText);
+                    var errors = response;
 
-                console.error("Server return an error");
+                    for (var error of errors) {
+                        console.error(error.errorMessage);
+                    }
+
+                    return obj.error(errors);
+                }
             }
         };
 
         request.onerror = function () {
             // Connection error
             if (obj.error) {
-                return error;
+                var response = JSON.parse(request.responseText);
+                var errors = response;
+
+                for (var error of errors) {
+                    console.error(error.errorMessage);
+                }
+
+                return obj.error;
             }
 
             console.error("Can't connect to server");

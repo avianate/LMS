@@ -60,6 +60,12 @@ namespace LMS
                             ctx.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
                         }
 
+                        else if (ctx.Request.Path.StartsWithSegments("/account/signin") &&
+                                 ctx.Response.StatusCode == (int)HttpStatusCode.Unauthorized)
+                        {
+                            ctx.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                        }
+
                         else
                         {
                             ctx.Response.Redirect(ctx.RedirectUri);

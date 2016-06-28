@@ -1,43 +1,72 @@
-﻿var BLOG = (function (XHR) {
-    var container = document.querySelector(".ajax-container");
-    var postContainer = document.querySelector("#posts");
+﻿var BLOG = (function (XHR, baseUtils) {
+    "use strict";
+    
+    var templateUrl = "/app/blog/blog.html";
+    var container = baseUtils.getContainer(".ajax-container");
 
-    var div = document.createElement("div");
-    div.classList.add("row", "center", "middle", "full");
+    var postContainer = {};         // set after template is loaded
+    var postData;
 
-    var p = document.createElement("p");
-    p.innerText = "This is a subheading created by a dynamically-loaded JS file";
+    document.addEventListener("DOMContentLoaded", getTemplate());
+    //getTemplate();
 
-    div.appendChild(p);
-    container.appendChild(div);
+    // load the html template
+    function getTemplate() {
+        baseUtils.getTemplate(templateUrl, loadContent);
+    };
+
+    function loadContent(data) {
+        baseUtils.successHandler(container, data);
+        baseUtils.changeNavbar(true);
+
+        postContainer = baseUtils.getContainer("#posts");
+        loadPosts();
+    };
 
     // have template, will populate it
     // let's get the data
-    XHR.get({
-        url: "/api/data/latest",
-        responseType: "JSON",
-        success: populatePreviews
-    });
+    function loadPosts() {
+        XHR.get({
+            url: "/api/data/latest",
+            responseType: "JSON",
+            success: templateIsReady
+        });
+    };
+
+    function templateIsReady(data) {
+        // save the data until the template is ready
+        if (data !== null && data !== undefined) {
+            postData = data;
+        }
+
+        // check for template
+        var template = baseUtils.getContainer("#blogPreviewTemplate");
+
+        // continue polling until template is loaded and ready
+        if (template === null) {
+            setTimeout(templateIsReady, 500);
+        } else {
+            populatePreviews(postData);
+        }
+    };
 
     function populatePreviews(data) {
-        var template = document.querySelector("#blogPreviewTemplate");
+        var template = baseUtils.getContainer("#blogPreviewTemplate");
 
         for (var post of data) {
             template.content.querySelector(".preview-image img").src = post.imageUrl;
             template.content.querySelector(".preview-content").innerText = post.body;
 
             var clone = document.importNode(template.content, true);
+
+            if (postContainer === null) {
+                postContainer = baseUtils.getContainer("#posts");
+            }
+
             postContainer.appendChild(clone);
 
             console.log(post);
         }
     };
 
-    // publicly exposed methods
-    return {
-        // mapRoute: mapRoute,
-        // route: route,
-        // getRoutes: getRoutes
-    };
-
-}(XHR));
+}(XHR, baseUtils));
