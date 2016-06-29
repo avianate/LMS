@@ -13,7 +13,7 @@ namespace LMS.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.0.0-rc2-20896");
+                .HasAnnotation("ProductVersion", "1.0.0-rc2-20901");
 
             modelBuilder.Entity("LMS.Entities.Category", b =>
                 {
@@ -55,6 +55,8 @@ namespace LMS.Migrations
                     b.Property<string>("CourseUrl");
 
                     b.Property<string>("Description");
+
+                    b.Property<string>("ImageUrl");
 
                     b.Property<string>("Subtitle");
 

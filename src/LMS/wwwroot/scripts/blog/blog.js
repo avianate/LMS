@@ -53,8 +53,9 @@
         var template = baseUtils.getContainer("#blogPreviewTemplate");
 
         for (var post of data) {
+            template.content.querySelector(".post-link").href = post.slug;
             template.content.querySelector(".preview-image img").src = post.imageUrl;
-            template.content.querySelector(".preview-content").innerText = post.body;
+            template.content.querySelector(".post-link").innerText = post.title;
 
             var clone = document.importNode(template.content, true);
 
