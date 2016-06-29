@@ -1,4 +1,4 @@
-﻿var BLOG = (function (XHR, baseUtils) {
+﻿var BLOG = (function (XHR, baseUtils, router) {
     "use strict";
     
     var templateUrl = "/app/blog/blog.html";
@@ -69,4 +69,15 @@
         }
     };
 
-}(XHR, baseUtils));
+    function mapRoutes(posts) {
+
+        for (var post of posts) {
+
+            router.mapRoute({
+                route: post.slug,
+                controller: "/scripts/blog/post.js"
+            });
+        }
+    }
+
+}(XHR, baseUtils, router));

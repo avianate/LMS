@@ -6,20 +6,36 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LMS.Data
 {
+    /// <summary>
+    ///     The LMS Repository
+    /// </summary>
     public class LMSRepository : ILMSRepository
     {
         private LMSContext _context;
 
+        /// <summary>
+        ///     Constructor with injected context
+        /// </summary>
+        /// <param name="context"></param>
         public LMSRepository(LMSContext context)
         {
             _context = context;
         }
 
+        /// <summary>
+        ///     Gets list of all categories
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Category> GetAllCategories()
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        ///     Gets all categories for a specific post
+        /// </summary>
+        /// <param name="postId"></param>
+        /// <returns></returns>
         public IEnumerable<Category> GetAllCategoriesForPost(int postId)
         {
             var postCategories = _context.PostCategories;
@@ -37,6 +53,11 @@ namespace LMS.Data
             return categoriesForPost;
         }
 
+        /// <summary>
+        ///     Gets all comments for a specific post
+        /// </summary>
+        /// <param name="postId"></param>
+        /// <returns></returns>
         public IEnumerable<Comment> GetAllCommentsForPost(int postId)
         {
             var postComments = _context.PostComments;
@@ -54,6 +75,10 @@ namespace LMS.Data
             return commentsForPost;
         }
 
+        /// <summary>
+        ///     Gets all posts whether published or not
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Post> GetAllPosts()
         {
             var posts = _context.Posts
@@ -65,6 +90,10 @@ namespace LMS.Data
             return posts;
         }
 
+        /// <summary>
+        ///     Gets all published posts
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Post> GetAllPublishedPosts()
         {
             var postTags = _context.PostTags;
@@ -78,11 +107,20 @@ namespace LMS.Data
             return posts;
         }
 
+        /// <summary>
+        ///     Gets all the tags
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Tag> GetAllTags()
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        ///     Gets all tags for a specific post
+        /// </summary>
+        /// <param name="postId"></param>
+        /// <returns></returns>
         public IEnumerable<Tag> GetAllTagsForPost(int postId)
         {
             var postTags = _context.PostTags;
@@ -100,6 +138,11 @@ namespace LMS.Data
             return tagsForPost;
         }
 
+        /// <summary>
+        ///     Gets all posts for a specific author / user
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public IEnumerable<Post> GetUserPosts(string name)
         {
             var posts = _context.Posts
@@ -110,6 +153,11 @@ namespace LMS.Data
             return posts;
         }
 
+        /// <summary>
+        ///     Adds the tags, categories, and comments to a post after
+        ///     it is retrieved from the database
+        /// </summary>
+        /// <param name="posts"></param>
         private void SetAllPostEntities(List<Post> posts)
         {
             foreach (var post in posts)
@@ -128,6 +176,11 @@ namespace LMS.Data
             }
         }
 
+        /// <summary>
+        ///     Initializes tags, categories, and comments navigation properties 
+        ///     on each post when it is retrieved from the database
+        /// </summary>
+        /// <param name="post"></param>
         private void InitPostProperties (Post post)
         {
             if (post.Tags == null)

@@ -17,26 +17,54 @@ namespace LMS.Data
 
         #region DBSets
 
+        /// <summary>
+        ///     Posts DbSet
+        /// </summary>
         public DbSet<Post> Posts { get; set; }
 
+        /// <summary>
+        ///     Comments DbSet
+        /// </summary>
         public DbSet<Comment> Comments { get; set; }
 
+        /// <summary>
+        ///     Categories DbSet
+        /// </summary>
         public DbSet<Category> Categories { get; set; }
 
+        /// <summary>
+        ///     Tags DbSet
+        /// </summary>
         public DbSet<Tag> Tags { get; set; }
 
+        /// <summary>
+        ///     PostTags DbSet
+        /// </summary>
         public DbSet<PostTag> PostTags { get; set; }
 
+        /// <summary>
+        ///     PostCategories DbSet
+        /// </summary>
         public DbSet<PostCategory> PostCategories { get; set; }
 
+        /// <summary>
+        ///     PostComments DbSet
+        /// </summary>
         public DbSet<PostComment> PostComments { get; set; }
 
+        /// <summary>
+        ///     Coures DbSet
+        /// </summary>
         public DbSet<Course> Courses { get; set; }
 
         #endregion DBSets
 
         #region ModelBuilder
 
+        /// <summary>
+        ///     Sets the navigation property keys
+        /// </summary>
+        /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
