@@ -110,7 +110,7 @@
     };
 
     function canSubmitForm(e) {
-        if (e.key.toLowerCase() === "enter") {
+        if (e.keyIdentifier.toLowerCase() === "enter") {
 
             // fake button press
             submitButton.classList.toggle("active");
