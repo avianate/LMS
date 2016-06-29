@@ -32,6 +32,20 @@ namespace LMS.Migrations
                 await _userManager.CreateAsync(newUser, "P@ssword1");
             }
 
+            if (!_context.Courses.Any())
+            {
+                var course = new Course
+                {
+                    Title = "Cessna 172S",
+                    Subtitle = "Steam Guage Edition",
+                    CourseUrl = "/c172s-steam",
+                    Description = "Everything you need to know to about the Cessna 172 SP"
+                };
+
+                _context.Courses.Add(course);
+                _context.SaveChanges();
+            }
+
             if (!_context.Posts.Any())
             {
                 var category = new Category

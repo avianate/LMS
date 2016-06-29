@@ -31,6 +31,8 @@ namespace LMS.Data
 
         public DbSet<PostComment> PostComments { get; set; }
 
+        public DbSet<Course> Courses { get; set; }
+
         #endregion DBSets
 
         #region ModelBuilder
