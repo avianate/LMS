@@ -39,7 +39,8 @@ namespace LMS.Migrations
                     Title = "Cessna 172S",
                     Subtitle = "Steam Guage Edition",
                     CourseUrl = "/c172s-steam",
-                    Description = "Everything you need to know to about the Cessna 172 SP"
+                    Description = "Everything you need to know to about the Cessna 172 SP",
+                    IsPublished = true
                 };
 
                 _context.Courses.Add(course);

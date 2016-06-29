@@ -23,5 +23,9 @@ namespace LMS.Data
         IEnumerable<Tag> GetAllTags();
 
         IEnumerable<Tag> GetAllTagsForPost(int postId);
+
+        IEnumerable<Course> GetAllCourses();
+
+        IEnumerable<Course> GetAllPublishedCourses();
     }
 }

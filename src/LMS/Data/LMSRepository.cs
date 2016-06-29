@@ -198,5 +198,24 @@ namespace LMS.Data
                 post.Comments = new List<Comment>();
             }
         }
+
+        public IEnumerable<Course> GetAllCourses()
+        {
+            var courses = _context.Courses
+                                    .OrderBy(t => t.Title)
+                                    .ToList();
+
+            return courses;
+        }
+
+        public IEnumerable<Course> GetAllPublishedCourses()
+        {
+            var courses = _context.Courses
+                                    .Where(p => p.IsPublished)
+                                    .OrderBy(t => t.Title)
+                                    .ToList();
+
+            return courses;
+        }
     }
 }

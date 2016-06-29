@@ -18,5 +18,7 @@ namespace LMS.Entities
         public string CourseUrl { get; set; }
 
         public string Description { get; set; }
+
+        public bool IsPublished { get; set; }
     }
 }
