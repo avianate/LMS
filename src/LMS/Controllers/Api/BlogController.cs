@@ -7,7 +7,7 @@ using LMS.Data;
 
 namespace LMS.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]/[action]/{slug?}")]
     public class BlogController : Controller
     {
         private readonly ILMSRepository _repo;
@@ -41,6 +41,20 @@ namespace LMS.Controllers
             var posts = _repo.GetAllPublishedPosts().Take(20);
 
             return Json(posts);
+        }
+
+        [HttpGet]
+        public JsonResult Post()
+        {
+            var slug = RouteData.Values["slug"].ToString();
+            var post = _repo.GetPublishedPost(slug);
+
+            if (post == null)
+            {
+                return Json(false);
+            }
+
+            return Json(post);
         }
     }
 }

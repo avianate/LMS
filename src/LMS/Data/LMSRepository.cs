@@ -11,7 +11,13 @@ namespace LMS.Data
     /// </summary>
     public class LMSRepository : ILMSRepository
     {
+        #region Fields
+
         private LMSContext _context;
+
+        #endregion Fields
+
+        #region Constructors
 
         /// <summary>
         ///     Constructor with injected context
@@ -20,6 +26,32 @@ namespace LMS.Data
         public LMSRepository(LMSContext context)
         {
             _context = context;
+        }
+
+        #endregion Constructors
+
+        #region Methods
+
+        public Post GetPost(string slug)
+        {
+            var post = _context.Posts
+                                    .Where(s => s.Slug == slug)
+                                    .OrderBy(d => d.PublishDate)
+                                    .FirstOrDefault();
+
+            return post;
+        }
+
+        public Post GetPublishedPost(string slug)
+        {
+            var post = GetPost(slug);
+
+            if (post.IsPublished)
+            {
+                return post;
+            }
+
+            return null;
         }
 
         /// <summary>
@@ -217,5 +249,7 @@ namespace LMS.Data
 
             return courses;
         }
+
+        #endregion Methods
     }
 }

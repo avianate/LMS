@@ -8,8 +8,8 @@ using LMS.Data;
 namespace LMS.Migrations
 {
     [DbContext(typeof(LMSContext))]
-    [Migration("20160629212335_v2")]
-    partial class v2
+    [Migration("20160706190720_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

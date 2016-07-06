@@ -12,47 +12,28 @@
     window.addEventListener("popstate", route);
     window.addEventListener("DOMContentLoaded", route);
 
-    initLinks();
+    function startRouting(e) {
+        e.preventDefault();
+        e.stopPropagation();
 
-    // hijack click events on all anchor tags to prevent browser from loading their URLs
-    // we want our client side router to handle the links
-    function initLinks() {
-        var links = document.querySelectorAll("a"),
-            length = links.length,
-            i = 0,
-            link;
-
-        for (; i < length; i++) {
-            link = links[i];
-
-            link.addEventListener("click", function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-
-                // if there is a data-no-route attribute on the anchor tag,
-                // it's controller will handle the events
-                if (e.target.hasAttribute("data-no-route")) {
-                    return;
-                }
-
-                // start fading out the ajax container before each request is sent
-                //var container = getContainer();
-
-                //if (container.classList.contains("fade-in")) {
-                //    container.classList.remove("fade-in");
-                //}
-
-                //container.classList.add("fade-out");
-
-                pushHistory(e.currentTarget);
-            });
+        // if there is a data-no-route attribute on the anchor tag,
+        // it's controller will handle the events
+        if (e.target.hasAttribute("data-no-route")) {
+            return;
         }
-    }
+
+        pushHistory(e.currentTarget);
+    };
 
     // updates the browser history
     function pushHistory(target) {
         var targetUrl = target.getAttribute("href");
         var prettyUrl = targetUrl === "/" ? "/" : targetUrl.replace("/", "");
+
+        // if we're already on the page, no need to continue
+        if (targetUrl === location.pathname) {
+            return;
+        }
 
         history.pushState(prettyUrl, prettyUrl, prettyUrl);
         document.title = targetUrl.replace("/", "");
@@ -74,7 +55,9 @@
     */
     // method to add a new client side route
     function mapRoute(obj) {
-        var thisObject = obj.route.toLowerCase();
+        var thisObject = obj.route.toLowerCase(),
+            href = "a[href='{url}']",
+            links = {};
 
         routes[thisObject] = {
             //templateUrl: obj.templateUrl || obj.route.toLowerCase(),
@@ -84,6 +67,17 @@
 
         if (obj.default) {
             defaultRoute = routes[thisObject];
+        }
+        
+        href = href.replace("{url}", thisObject);
+        links = document.querySelectorAll(href);
+
+        initLinks(links);
+    };
+
+    function initLinks(links) {
+        for (var link of links) {
+            link.addEventListener("click", startRouting);
         }
     };
 
@@ -113,7 +107,11 @@
 
         controller = currentRoute.controller;        
 
-        addControllerToDOM(controller);
+        if (typeof(controller) === "string") {
+            addControllerToDOM(controller);
+        } else if (typeof(controller) === "function") {
+            controller();
+        }
         //// get the data from the templateUrl
         //XHR.get({
         //    requestType: "GET",

@@ -53,7 +53,7 @@
         var template = baseUtils.getContainer("#blogPreviewTemplate");
 
         for (var post of data) {
-            template.content.querySelector(".post-link").href = post.slug;
+            template.content.querySelector(".post-link").href = "/blog/post/" + post.slug;
             template.content.querySelector(".preview-image img").src = post.imageUrl;
             template.content.querySelector(".post-link").innerText = post.title;
 
@@ -67,17 +67,34 @@
 
             console.log(post);
         }
+
+        // load post script
+        addPostScript();
+        mapRoutes(data);
     };
+
+    function addPostScript() {
+        var newScript = document.createElement("script");
+
+        newScript.id = "postController";
+        newScript.src = "/scripts/blog/post.js";
+
+        document.body.appendChild(newScript);
+    }
 
     function mapRoutes(posts) {
 
         for (var post of posts) {
-
             router.mapRoute({
-                route: post.slug,
-                controller: "/scripts/blog/post.js"
+                route: "/blog/post/" + post.slug,
+                templateUrl: "/app/blog/post.html",
+                controller: function (data) {
+                    // display post
+                    var foo = 1;
+                }
             });
         }
-    }
+    };
+    
 
 }(XHR, baseUtils, router));

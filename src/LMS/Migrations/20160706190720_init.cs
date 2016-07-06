@@ -47,6 +47,7 @@ namespace LMS.Migrations
                     CourseUrl = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     ImageUrl = table.Column<string>(nullable: true),
+                    IsPublished = table.Column<bool>(nullable: false),
                     Subtitle = table.Column<string>(nullable: true),
                     Title = table.Column<string>(nullable: true)
                 },

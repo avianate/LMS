@@ -8,6 +8,10 @@ namespace LMS.Data
     /// </summary>
     public interface ILMSRepository
     {
+        Post GetPost(string slug);
+
+        Post GetPublishedPost(string slug);
+
         IEnumerable<Post> GetAllPosts();
 
         IEnumerable<Post> GetAllPublishedPosts();
