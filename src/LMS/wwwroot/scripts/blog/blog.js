@@ -68,32 +68,43 @@
             console.log(post);
         }
 
-        // load post script
-        addPostScript();
-        mapRoutes(data);
+        initLinks(data);
     };
 
-    function addPostScript() {
-        var newScript = document.createElement("script");
-
-        newScript.id = "postController";
-        newScript.src = "/scripts/blog/post.js";
-
-        document.body.appendChild(newScript);
-    }
-
-    function mapRoutes(posts) {
-
+    function initLinks(posts) {
         for (var post of posts) {
-            router.mapRoute({
-                route: "/blog/post/" + post.slug,
-                templateUrl: "/app/blog/post.html",
-                controller: function (data) {
-                    // display post
-                    var foo = 1;
-                }
-            });
+
+            var href = "a[href='{url}'";
+            href = href.replace("{url}", "/blog/post/" + post.slug);
+
+            var postLink = postContainer.querySelector(href);
+            postLink.addEventListener("click", handleClick);
         }
+    };
+
+    function handleClick(e) {
+        var target = e.target;
+        e.preventDefault();
+        e.stopPropagation();
+
+        var container = target.parentElement.parentElement;
+
+        container.classList.remove("row", "middle");
+        container.classList.add("expanded");
+
+        var blogLink = document.querySelector("a[href='/blog'");
+        blogLink.addEventListener("click", goBackToBlog);
+    };
+
+    function goBackToBlog(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        var expandedPost = document.querySelector(".post.expanded");
+        expandedPost.classList.add("row", "middle");
+        expandedPost.classList.remove("expanded");
+
+        e.target.removeEventListener("click", goBackToBlog);
     };
     
 

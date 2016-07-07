@@ -295,6 +295,10 @@ div.summary .right-content {
     max-width: 550px;
 }
 
+.blog #posts {
+    position: relative;
+}
+
 .blog #posts .post.row {
     margin: 10px 0;
     height: 150px;
@@ -308,4 +312,15 @@ div.summary .right-content {
 
 .blog .post.fade-in {
     animation: fadeIn 1s forwards;
+}
+
+.blog .post {
+    transition: all 1s ease-in-out;
+}
+
+.blog .post.expanded {
+    width: 100%;
+    height: 100%;
+    background: white;
+    z-index: 1;
 }
